@@ -1,0 +1,67 @@
+.clients {
+  padding: 100px 0 110px;
+
+  @media (max-width: 560px) {
+    padding: 70px 0 80px;
+  }
+}
+
+
+
+.sectionHead {
+  text-align: center;
+  margin: 0 auto 50px;
+
+  h2 {
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 600;
+  }
+}
+
+
+
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+
+  @media (max-width: 560px) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+.card {
+  height: 90px;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #0f0f0f;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0 8px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    white-space: nowrap;
+    opacity: 0.75;
+    transition: opacity 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+      color: var(--paper);
+    }
+
+  }
+}

@@ -1,0 +1,107 @@
+.section {
+  padding: 110px 0;
+  overflow: hidden;
+
+  @media (max-width: 560px) {
+    padding: 80px 0;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 14px;
+
+  &::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--cyan);
+  }
+}
+
+.sectionHead {
+  max-width: 640px;
+  margin-bottom: 56px;
+
+  h2 {
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 600;
+    margin-top: 14px;
+  }
+
+  p {
+    color: var(--text-dim);
+    margin-top: 16px;
+    font-size: 16px;
+    max-width: 520px;
+  }
+}
+
+.portList {
+  border-top: 1px solid var(--ink-line);
+}
+
+.port {
+  display: grid;
+  grid-template-columns: 90px 1fr 340px 24px;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--ink-line);
+  transition: background 0.25s ease;
+
+  &:hover {
+    background: var(--ink-soft);
+  }
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 22px 0;
+  }
+}
+
+.portId {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+}
+
+.status {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  margin-right: 8px;
+  box-shadow: 0 0 8px 1px var(--cyan-dim);
+}
+
+.portName {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.portDesc {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+.portArrow {
+  color: var(--text-dim);
+  font-size: 18px;
+
+  @media (max-width: 760px) {
+    display: none;
+  }
+}

@@ -1,22 +1,25 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import styles from "./Hero.module.scss";
 import HubDiagram from "../HubDiagram/HubDiagram";
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: {
     transition: { staggerChildren: 0.12, delayChildren: 0.15 },
   },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
   },
 };
 
@@ -24,11 +27,7 @@ export default function Hero() {
   return (
     <section className={styles.hero} id="home">
       <div className={`wrap ${styles.grid}`}>
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
+        <motion.div variants={container} initial="hidden" animate="show">
           <motion.div variants={item} className={styles.eyebrow}>
             Full-service digital &amp; marketing agency
           </motion.div>
@@ -40,8 +39,8 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p variants={item} className={styles.lead}>
-            Strategy, content, code, film and sound — eight disciplines,
-            wired into one team, moving in sync so nothing gets lost between
+            Strategy, content, code, film and sound — eight disciplines, wired
+            into one team, moving in sync so nothing gets lost between
             hand-offs.
           </motion.p>
 

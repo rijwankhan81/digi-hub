@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
-import SmoothScroll from "@/components/SmoothScroll/SmoothScroll";
 import "./globals.scss";
+import ReactLenis from "lenis/react";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -43,8 +43,7 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable}`}
       >
-        <SmoothScroll />
-        {children}
+        <ReactLenis root>{children}</ReactLenis>
       </body>
     </html>
   );

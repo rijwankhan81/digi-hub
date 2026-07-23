@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Header.module.scss";
 import logo from "../../../public/images/logo.jpg";
+import Link from "next/link";
+import { useLenis } from "lenis/react";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -18,6 +20,15 @@ const NAV_LINKS = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const lenis = useLenis();
+  const handleScroll = (id: string) => {
+    setOpen(false);
+
+    lenis?.scrollTo(id, {
+      duration: 1.5,
+      offset: -80,
+    });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -45,7 +56,13 @@ export default function Header() {
           <ul>
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a href={link.href}>{link.label}</a>
+                <Link
+                  href={link.href}
+                  onClick={() => handleScroll(link.href)}
+                  scroll={false}
+                >
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -79,9 +96,17 @@ export default function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 * i, duration: 0.3 }}
                 >
-                  <a href={link.href} onClick={() => setOpen(false)}>
+                  <Link
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault(); // Default jump ko roke
+                      setOpen(false); // Mobile menu close kare
+                      handleScroll(link.href); // Smooth scroll
+                    }}
+                    scroll={false}
+                  >
                     {link.label}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>

@@ -45,7 +45,7 @@ export default function Header() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className={styles.inner}>
-        <a href="#home" className={styles.logo}>
+        <a href="/" className={styles.logo}>
           <span className={styles.logoImg}>
             <Image src={logo} alt="Digi Hub" width={36} height={36} priority />
           </span>
@@ -98,11 +98,7 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault(); // Default jump ko roke
-                      setOpen(false); // Mobile menu close kare
-                      handleScroll(link.href); // Smooth scroll
-                    }}
+                    onClick={() => handleScroll(link.href)}
                     scroll={false}
                   >
                     {link.label}

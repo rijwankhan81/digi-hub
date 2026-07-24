@@ -1,0 +1,27 @@
+// Design tokens — the single source of truth for colors, fonts, spacing,
+// and other shared values. Exposed as CSS custom properties so any
+// component's .module.scss can read them via var(--token-name) without
+// importing anything.
+
+:root {
+    // Colors
+    --ink: #0b0e13;
+    --ink-soft: #151a22;
+    --ink-line: rgba(255, 255, 255, 0.09);
+    --paper: #eceef2;
+    --paper-line: rgba(11, 14, 19, 0.1);
+    --cyan: #00d9b8;
+    --cyan-dim: rgba(0, 217, 184, 0.15);
+    --amber: #ffb238;
+    --text-dim: #8b93a3;
+    --text-dim-dark: #5b6373;
+
+    // Layout
+    --radius: 2px;
+    --maxw: 1180px;
+
+    // Typography
+    --font-display: var(--font-space-grotesk), sans-serif;
+    --font-body: var(--font-plex-sans), sans-serif;
+    --font-mono: var(--font-plex-mono), monospace;
+}

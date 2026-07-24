@@ -1,0 +1,68 @@
+@use "../../styles/breakpoints" as *;
+
+.section {
+    padding: 100px 0;
+    border-bottom: 1px solid var(--ink-line);
+
+    @include respond("sm") {
+        padding: 70px 0;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 60px;
+
+    @include respond("xl") {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 14px;
+
+    &::before {
+        content: "";
+        width: 22px;
+        height: 1px;
+        background: var(--cyan);
+    }
+}
+
+.label {
+    h2 {
+        font-size: clamp(26px, 3.4vw, 36px);
+        font-weight: 600;
+        line-height: 1.15;
+        max-width: 360px;
+    }
+}
+
+.copy {
+    p {
+        font-size: 17px;
+        line-height: 1.7;
+        color: var(--text-dim);
+        max-width: 640px;
+
+        &+p {
+            margin-top: 20px;
+        }
+    }
+}
+
+.signature {
+    color: var(--paper) !important;
+    font-family: var(--font-display);
+    font-weight: 500;
+}

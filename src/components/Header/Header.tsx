@@ -9,8 +9,8 @@ import Link from "next/link";
 import { useLenis } from "lenis/react";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "About us", href: "#about" },
+  { label: "Home", href: "/" },
+  { label: "About us", href: "/about" },
   { label: "Services", href: "#services" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "Contact Us", href: "#contact" },

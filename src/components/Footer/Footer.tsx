@@ -50,10 +50,10 @@ export default function Footer() {
             <h4>Sitemap</h4>
             <ul>
               <li>
-                <a href="#home">Home</a>
+                <a href="/">Home</a>
               </li>
               <li>
-                <a href="#about">About us</a>
+                <a href="/about">About us</a>
               </li>
               <li>
                 <a href="#services">Services</a>

@@ -1,3 +1,5 @@
+@use "../../styles/breakpoints" as *;
+
 .clients {
   padding: 100px 0 110px;
 
@@ -26,9 +28,10 @@
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 18px;
 
-  @media (max-width: 560px) {
+  @include respond("sm") {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
+
 }
 
 .card {

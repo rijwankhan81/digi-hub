@@ -1,3 +1,5 @@
+@use "../../styles/breakpoints" as *;
+
 .showreel {
   position: relative;
   padding: 100px 0;
@@ -10,10 +12,14 @@
   align-items: center;
   justify-content: center;
 
+  @include respond("xl") {
+    min-height: 60vh;
+  }
 
-  @media (max-width: 560px) {
+  @include respond("sm") {
     padding: 90px 0;
   }
+
 
   .bgVideo {
     position: absolute;

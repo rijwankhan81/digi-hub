@@ -1,0 +1,77 @@
+// Common base styles — resets, element defaults, and shared utility
+// classes used across the site. Tokens (colors/fonts/spacing) live in
+// tokens.scss; this file only consumes them via var(--token-name).
+@use "breakpoints" as *;
+
+* {
+    box-sizing: border-box;
+}
+
+// Our custom smooth-scroll intercepts wheel events directly and drives
+// window.scrollTo(), so native CSS smooth-scroll must stay off or the two
+// would fight each other.
+html {
+    scroll-behavior: auto;
+}
+
+body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-display);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+::selection {
+    background: var(--cyan);
+    color: var(--ink);
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+// Shared content-width wrapper, used by every section.
+.wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 32px;
+
+    @media (max-width: 560px) {
+        padding: 0 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}

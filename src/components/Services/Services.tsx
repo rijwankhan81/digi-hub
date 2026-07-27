@@ -1,117 +1,152 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useGSAP } from "@gsap/react";
 import styles from "./Services.module.scss";
+import { useGsap } from "@/lib/gsap";
 
 const SERVICES = [
   {
     id: "01",
-    name: "Digital Marketing Strategy",
-    desc: "Positioning, funnels and media plans built around where your buyers actually spend time.",
+    name: "Digital Marketing",
+    items: [
+      "Social Media Marketing",
+      "Marketing Strategy",
+      "Google Ads (PPC)",
+      "SEO",
+      "Lead Generation",
+    ],
   },
   {
     id: "02",
-    name: "Brand Content Production",
-    desc: "Photography, copy and design systems that hold together across every touchpoint.",
+    name: "Branding & Creative",
+    items: ["Brand Strategy", "Brand Identity", "Corporate Profile Design"],
   },
   {
     id: "03",
-    name: "Social Media Content",
-    desc: "Always-on content calendars, reels and community management that keep feeds alive.",
+    name: "Content & Media Production",
+    items: [
+      "TVC & OVC Production",
+      "Live Streaming",
+      "Documentary & Film Production",
+      "Corporate & Product Photography",
+      "Videography",
+      "Podcast Production",
+      "Studio Rental",
+      "Video Editing",
+      "Motion & Graphics",
+      "Copywriting",
+    ],
   },
   {
     id: "04",
-    name: "Website Development",
-    desc: "Fast, responsive sites built to convert visitors, not just to look good in a pitch deck.",
+    name: "Business Consulting",
+    items: [
+      "Business Strategy",
+      "Startup Consulting",
+      "Sales Consulting",
+      "Market Research",
+      "Go-to-Market Strategy",
+      "Digital Transformation",
+    ],
   },
   {
     id: "05",
-    name: "App Development",
-    desc: "iOS, Android and cross-platform apps, from first wireframe through to app-store launch.",
+    name: "Website & App Development",
+    items: [
+      "Corporate Websites",
+      "E-commerce Websites",
+      "Landing Page",
+      "Custom Web Applications",
+      "UI/UX Design",
+      "SEO",
+      "Website Maintenance",
+    ],
   },
   {
     id: "06",
-    name: "Documentary & Film Making",
-    desc: "Brand films and documentary-style stories shot to hold attention past the first three seconds.",
+    name: "AI Solutions",
+    items: [
+      "AI Chatbots",
+      "AI Customer Support",
+      "AI Content Creation",
+      "AI Marketing Automation",
+      "Workflow Automation",
+      "CRM Integration",
+    ],
   },
   {
     id: "07",
-    name: "Animation & Motion Graphics",
-    desc: "2D/3D animation and motion design for explainers, ads and product stories.",
-  },
-  {
-    id: "08",
-    name: "Studio & Podcast",
-    desc: "A full recording studio and production support for branded podcasts and audio series.",
+    name: "Training & Workshops",
+    items: [
+      "Digital Marketing Training",
+      "AI for Business",
+      "Corporate Training",
+    ],
   },
 ];
 
-/**
- * Each row tracks its OWN scroll progress (as it travels from the bottom
- * of the viewport up to about the middle), and slides in from the side
- * across that window. Because the rows are stacked, this naturally
- * cascades: row 1 finishes sliding in a bit before row 2 starts, row 2
- * before row 3, and so on — all driven by how far you've actually
- * scrolled, not a fixed timer.
- */
-function PortRow({ s }: { s: (typeof SERVICES)[number] }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.92", "start 0.45"],
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], [264, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
-  return (
-    <motion.div
-      ref={ref}
-      className={styles.port}
-      style={{ x, opacity }}
-      whileHover="hover"
-    >
-      <div className={styles.portId}>
-        <span className={styles.status} />
-        PORT {s.id}
-      </div>
-      <div className={styles.portName}>{s.name}</div>
-      <div className={styles.portDesc}>{s.desc}</div>
-      <motion.div
-        className={styles.portArrow}
-        variants={{ hover: { x: 4, color: "var(--cyan)" } }}
-      >
-        ↗
-      </motion.div>
-    </motion.div>
-  );
-}
-
 export default function Services() {
-  return (
-    <section className={styles.section} id="services">
-      <div className="wrap">
-        <motion.div
-          className={styles.sectionHead}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className={styles.eyebrow}>Eight ports, one hub</div>
-          <h2>Everything under one roof.</h2>
-          <p>
-            Every service plugs into the same brief, the same team, the same
-            timeline — so your brand sounds and looks like one thing everywhere
-            it shows up.
-          </p>
-        </motion.div>
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const { gsap, ScrollTrigger } = useGsap();
 
-        <div className={styles.portList}>
+  useGSAP(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+
+    if (!section || !track) return;
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 861px)", () => {
+      const totalScroll = track.scrollWidth - window.innerWidth;
+
+      gsap.to(track, {
+        x: -totalScroll,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${totalScroll}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    return () => mm.revert();
+  }, []);
+
+  return (
+    <section className={styles.section} id="services" ref={sectionRef}>
+      <div className={styles.intro}>
+        <div className="wrap">
+          <div className={styles.eyebrow}>What we do</div>
+          <h2>
+            Seven disciplines.
+            <br />
+            One hub.
+          </h2>
+          <p className={styles.hint}>Scroll to explore →</p>
+        </div>
+      </div>
+      <div className="wrap">
+        <div className={styles.track} ref={trackRef}>
           {SERVICES.map((s) => (
-            <PortRow key={s.id} s={s} />
+            <div className={styles.panel} key={s.id}>
+              <div className={styles.panelInner}>
+                <div className={styles.panelId}>{s.id}</div>
+                <h3>{s.name}</h3>
+                <ul>
+                  {s.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           ))}
         </div>
       </div>

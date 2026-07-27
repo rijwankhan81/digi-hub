@@ -1,34 +1,35 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Header.module.scss";
 import logo from "../../../public/images/logo.jpg";
-import Link from "next/link";
-import { useLenis } from "lenis/react";
+import { useActiveNav } from "@/hooks/useActiveNav";
 
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About us", href: "/about" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Contact Us", href: "#contact" },
-  { label: "Blog", href: "#blog" },
+// "page" links are real routes; "hash" links are sections on the homepage.
+// When we're not already on the homepage, hash links get a "/" prefix so
+// they navigate back there instead of doing nothing on the current page.
+type NavLink =
+  | { label: string; hash: string; page?: never }
+  | { label: string; page: string; hash?: never };
+
+const NAV_LINKS: NavLink[] = [
+  { label: "Home", hash: "#home" },
+  { label: "About us", page: "/about" },
+  { label: "Services", hash: "#services" },
+  { label: "Portfolio", hash: "#portfolio" },
+  { label: "Contact Us", hash: "#contact" },
+  { label: "Blog", hash: "#blog" },
 ];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const lenis = useLenis();
-  const handleScroll = (id: string) => {
-    setOpen(false);
+  const { onHome, isActive } = useActiveNav();
 
-    lenis?.scrollTo(id, {
-      duration: 1.5,
-      offset: -80,
-    });
-  };
+  const resolveHref = (link: NavLink) =>
+    link.page ? link.page : onHome ? link.hash : `/${link.hash}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -45,7 +46,7 @@ export default function Header() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className={styles.inner}>
-        <a href="/" className={styles.logo}>
+        <a href={onHome ? "#home" : "/"} className={styles.logo}>
           <span className={styles.logoImg}>
             <Image src={logo} alt="Digi Hub" width={36} height={36} priority />
           </span>
@@ -55,14 +56,13 @@ export default function Header() {
         <nav className={styles.nav}>
           <ul>
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => handleScroll(link.href)}
-                  scroll={false}
+              <li key={link.label}>
+                <a
+                  href={resolveHref(link)}
+                  className={isActive(link) ? styles.active : undefined}
                 >
                   {link.label}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
@@ -91,18 +91,18 @@ export default function Header() {
             <ul>
               {NAV_LINKS.map((link, i) => (
                 <motion.li
-                  key={link.href}
+                  key={link.label}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 * i, duration: 0.3 }}
                 >
-                  <Link
-                    href={link.href}
-                    onClick={() => handleScroll(link.href)}
-                    scroll={false}
+                  <a
+                    href={resolveHref(link)}
+                    className={isActive(link) ? styles.active : undefined}
+                    onClick={() => setOpen(false)}
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </motion.li>
               ))}
             </ul>

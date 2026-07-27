@@ -94,6 +94,14 @@
     &:hover::after {
       width: 100%;
     }
+
+    &.active {
+      color: var(--paper);
+    }
+
+    &.active::after {
+      width: 100%;
+    }
   }
 
   @include respond("lg") {
@@ -177,5 +185,9 @@
     padding: 16px 0;
     font-size: 16px;
     color: var(--paper);
+
+    &.active {
+      color: var(--cyan);
+    }
   }
 }

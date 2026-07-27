@@ -4,8 +4,15 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./Footer.module.scss";
 import logo from "../../../public/images/logo.jpg";
+import { useActiveNav } from "@/hooks/useActiveNav";
+
+const OFFICES = ["Bangladesh", "Dubai", "Mexico"];
 
 export default function Footer() {
+  const { onHome, isActive } = useActiveNav();
+  const hash = (h: string) => (onHome ? h : `/${h}`);
+  const linkClass = (active: boolean) => (active ? styles.active : undefined);
+
   return (
     <footer className={styles.footer} id="contact">
       <div className="wrap">
@@ -16,7 +23,7 @@ export default function Footer() {
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 0.6 }}
           >
-            Let&apos;s plug your brand into the hub.
+            Let&apos;s plug your business into the hub.
           </motion.h2>
           <motion.a
             href="mailto:hello@digihub.agency"
@@ -34,15 +41,15 @@ export default function Footer() {
 
         <div className={styles.grid}>
           <div className={styles.brand}>
-            <a href="#home" className={styles.logo}>
+            <a href={onHome ? "#home" : "/"} className={styles.logo}>
               <span className={styles.logoImg}>
                 <Image src={logo} alt="Digi Hub" width={32} height={32} />
               </span>
               DIGI HUB
             </a>
             <p>
-              A one-stop marketing agency connecting strategy, content, code and
-              film under a single team.
+              A global one-stop business solutions agency — digital marketing,
+              branding, content, AI and consulting under a single team.
             </p>
           </div>
 
@@ -50,16 +57,36 @@ export default function Footer() {
             <h4>Sitemap</h4>
             <ul>
               <li>
-                <a href="/">Home</a>
+                <a
+                  href={hash("#home")}
+                  className={linkClass(isActive({ hash: "#home" }))}
+                >
+                  Home
+                </a>
               </li>
               <li>
-                <a href="/about">About us</a>
+                <a
+                  href="/about"
+                  className={linkClass(isActive({ page: "/about" }))}
+                >
+                  About us
+                </a>
               </li>
               <li>
-                <a href="#services">Services</a>
+                <a
+                  href={hash("#services")}
+                  className={linkClass(isActive({ hash: "#services" }))}
+                >
+                  Services
+                </a>
               </li>
               <li>
-                <a href="#portfolio">Portfolio</a>
+                <a
+                  href={hash("#portfolio")}
+                  className={linkClass(isActive({ hash: "#portfolio" }))}
+                >
+                  Portfolio
+                </a>
               </li>
             </ul>
           </div>
@@ -68,14 +95,30 @@ export default function Footer() {
             <h4>More</h4>
             <ul>
               <li>
-                <a href="#contact">Contact Us</a>
+                <a
+                  href={hash("#contact")}
+                  className={linkClass(isActive({ hash: "#contact" }))}
+                >
+                  Contact Us
+                </a>
               </li>
               <li>
-                <a href="#blog">Blog</a>
+                <a href={hash("#blog")}>Blog</a>
               </li>
               <li>
-                <a href="#services">Careers</a>
+                <a href={hash("#services")}>Careers</a>
               </li>
+            </ul>
+          </div>
+
+          <div className={styles.col}>
+            <h4>Offices</h4>
+            <ul>
+              {OFFICES.map((office) => (
+                <li key={office}>
+                  <span className={styles.officeName}>{office}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -98,7 +141,7 @@ export default function Footer() {
         <div className={styles.bottom}>
           <span>© 2026 Digi Hub. All rights reserved.</span>
           <span className={styles.mono}>
-            MADE WITH ONE TEAM, EIGHT DISCIPLINES
+            SEVEN DISCIPLINES, ONE HUB, THREE CONTINENTS
           </span>
         </div>
       </div>

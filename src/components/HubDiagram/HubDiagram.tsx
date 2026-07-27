@@ -3,28 +3,46 @@
 import { motion } from "framer-motion";
 import styles from "./HubDiagram.module.scss";
 
+const SERVICE_LABELS = [
+  "MARKETING",
+  "BRANDING",
+  "CONTENT",
+  "CONSULTING",
+  "WEB & APP",
+  "AI",
+  "TRAINING",
+];
+
+const CENTER = { x: 230, y: 230 };
+const RADIUS = 190;
+
 interface HubNode {
   x: number;
   y: number;
   label: string;
   color: string;
-  labelY: number;
   anchor: "start" | "middle" | "end";
-  labelX?: number;
 }
 
-const NODES: HubNode[] = [
-  { x: 230, y: 40, label: "STRATEGY", color: "var(--cyan)", labelY: 24, anchor: "middle" },
-  { x: 380, y: 90, label: "BRAND", color: "var(--amber)", labelY: 74, anchor: "middle" },
-  { x: 420, y: 230, label: "SOCIAL", color: "var(--cyan)", labelY: 222, anchor: "start", labelX: 392 },
-  { x: 380, y: 370, label: "WEB", color: "var(--amber)", labelY: 396, anchor: "middle" },
-  { x: 230, y: 420, label: "APP", color: "var(--cyan)", labelY: 440, anchor: "middle" },
-  { x: 80, y: 370, label: "FILM", color: "var(--amber)", labelY: 396, anchor: "middle" },
-  { x: 40, y: 230, label: "MOTION", color: "var(--cyan)", labelY: 222, anchor: "start", labelX: 66 },
-  { x: 80, y: 90, label: "PODCAST", color: "var(--amber)", labelY: 74, anchor: "middle" },
-];
+// Evenly distribute nodes around the circle, starting from straight up.
+const NODES: HubNode[] = SERVICE_LABELS.map((label, i) => {
+  const angle = (i / SERVICE_LABELS.length) * Math.PI * 2 - Math.PI / 2;
+  const x = CENTER.x + RADIUS * Math.cos(angle);
+  const y = CENTER.y + RADIUS * Math.sin(angle);
 
-const CENTER = { x: 230, y: 230 };
+  // Anchor the label so it reads outward from the node rather than
+  // overlapping the connecting line.
+  const anchor: HubNode["anchor"] =
+    Math.cos(angle) > 0.3 ? "start" : Math.cos(angle) < -0.3 ? "end" : "middle";
+
+  return {
+    x,
+    y,
+    label,
+    color: i % 2 === 0 ? "var(--cyan)" : "var(--amber)",
+    anchor,
+  };
+});
 
 export default function HubDiagram() {
   return (
@@ -51,7 +69,12 @@ export default function HubDiagram() {
           ))}
         </g>
 
-        <g stroke="var(--cyan)" strokeWidth={2} fill="none" strokeLinecap="round">
+        <g
+          stroke="var(--cyan)"
+          strokeWidth={2}
+          fill="none"
+          strokeLinecap="round"
+        >
           {NODES.map((n, i) => (
             <motion.line
               key={`pulse-${i}`}
@@ -61,34 +84,43 @@ export default function HubDiagram() {
               x2={n.x}
               y2={n.y}
               strokeDasharray="10 230"
-              style={{ animationDelay: `${i * 0.4}s` }}
+              style={{ animationDelay: `${i * 0.45}s` }}
             />
           ))}
         </g>
 
         <g>
-          {NODES.map((n, i) => (
-            <motion.g
-              key={`node-${i}`}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.4,
-                delay: 0.9 + i * 0.06,
-                ease: "backOut",
-              }}
-            >
-              <circle cx={n.x} cy={n.y} r={5} fill={n.color} />
-              <text
-                x={n.labelX ?? n.x}
-                y={n.labelY}
-                textAnchor={n.anchor}
-                className={styles.label}
+          {NODES.map((n, i) => {
+            const labelOffset = 16;
+            const dx = n.x - CENTER.x;
+            const dy = n.y - CENTER.y;
+            const len = Math.hypot(dx, dy) || 1;
+            const labelX = n.x + (dx / len) * labelOffset;
+            const labelY = n.y + (dy / len) * labelOffset + 4;
+
+            return (
+              <motion.g
+                key={`node-${i}`}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.9 + i * 0.06,
+                  ease: "backOut",
+                }}
               >
-                {n.label}
-              </text>
-            </motion.g>
-          ))}
+                <circle cx={n.x} cy={n.y} r={5} fill={n.color} />
+                <text
+                  x={labelX}
+                  y={labelY}
+                  textAnchor={n.anchor}
+                  className={styles.label}
+                >
+                  {n.label}
+                </text>
+              </motion.g>
+            );
+          })}
         </g>
 
         <motion.circle

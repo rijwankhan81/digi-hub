@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./FeaturedWork.module.scss";
-import PortfolioCard from "../PortfolioCard/PortfolioCard";
+import PortfolioCard from "../portfolio/PortfolioCard/PortfolioCard";
 import Lightbox from "../Lightbox/Lightbox";
 import { PORTFOLIO_ITEMS, type PortfolioItem } from "@/data/portfolio";
 

@@ -57,7 +57,7 @@ export default function Hero() {
 
             <motion.div variants={item} className={styles.ctas}>
               <motion.a
-                href="#contact"
+                href="/contact"
                 className={`${styles.btn} ${styles.btnPrimary}`}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}

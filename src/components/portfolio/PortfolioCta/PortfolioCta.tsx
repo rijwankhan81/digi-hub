@@ -20,7 +20,7 @@ export default function PortfolioCta() {
             for your business.
           </p>
           <motion.a
-            href="#contact"
+            href="/contact"
             className={styles.btn}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}

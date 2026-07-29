@@ -97,7 +97,7 @@ export default function Footer() {
               <li>
                 <a
                   href={hash("#contact")}
-                  className={linkClass(isActive({ hash: "#contact" }))}
+                  className={linkClass(isActive({ hash: "/contact" }))}
                 >
                   Contact Us
                 </a>

@@ -1,0 +1,31 @@
+@use "../../styles/breakpoints" as *;
+
+.section {
+    padding: 20px 0 120px;
+
+    @include respond("sm") {
+        padding: 10px 0 80px;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 80px;
+
+    @include respond("xl") {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+}
+
+.formCol {
+    background: var(--ink-soft);
+    border: 1px solid var(--ink-line);
+    border-radius: var(--radius);
+    padding: 40px;
+
+    @include respond("sm") {
+        padding: 26px 22px;
+    }
+}

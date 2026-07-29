@@ -10,7 +10,7 @@ import {
   PORTFOLIO_ITEMS,
   type PortfolioItem,
 } from "@/data/portfolio";
-import Lightbox from "../Lightbox/Lightbox";
+import Lightbox from "../../Lightbox/Lightbox";
 
 const FILTERS = ["All", ...PORTFOLIO_CATEGORIES] as const;
 

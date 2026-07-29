@@ -1,7 +1,7 @@
 import Header from "@/components/Header/Header";
-import PortfolioHero from "@/components/PortfolioHero/PortfolioHero";
-import PortfolioGrid from "@/components/PortfolioGrid/PortfolioGrid";
-import PortfolioCta from "@/components/PortfolioCta/PortfolioCta";
+import PortfolioHero from "@/components/portfolio/PortfolioHero/PortfolioHero";
+import PortfolioGrid from "@/components/portfolio/PortfolioGrid/PortfolioGrid";
+import PortfolioCta from "@/components/portfolio/PortfolioCta/PortfolioCta";
 import Footer from "@/components/Footer/Footer";
 
 export const metadata = {

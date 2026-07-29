@@ -1,7 +1,7 @@
 import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero/Hero";
 import Services from "@/components/Services/Services";
-import Showreel from "@/components/Showreel/Showreel";
+import FeaturedWork from "@/components/FeaturedWork/FeaturedWork";
 import Industries from "@/components/Industries/Industries";
 import Clients from "@/components/Clients/Clients";
 import Footer from "@/components/Footer/Footer";
@@ -13,7 +13,8 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
-        <Showreel />
+
+        <FeaturedWork />
         <Industries />
         <Clients />
       </main>

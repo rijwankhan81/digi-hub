@@ -18,7 +18,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "Home", hash: "#home" },
   { label: "About us", page: "/about" },
   { label: "Services", hash: "#services" },
-  { label: "Portfolio", hash: "#portfolio" },
+  { label: "Portfolio", page: "/portfolio" },
   { label: "Contact Us", hash: "#contact" },
   { label: "Blog", hash: "#blog" },
 ];

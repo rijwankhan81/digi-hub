@@ -1,0 +1,53 @@
+@use "../../styles/breakpoints" as *;
+
+.section {
+    padding: 0 0 110px;
+
+    @include respond("sm") {
+        padding: 0 0 70px;
+    }
+}
+
+.panel {
+    background: var(--ink-soft);
+    border: 1px solid var(--ink-line);
+    border-radius: var(--radius);
+    padding: 64px 40px;
+    text-align: center;
+
+    @include respond("sm") {
+        padding: 44px 24px;
+    }
+
+    h2 {
+        font-size: clamp(26px, 3.6vw, 38px);
+        font-weight: 600;
+    }
+
+    p {
+        margin-top: 14px;
+        color: var(--text-dim);
+        font-size: 16px;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    background: var(--cyan);
+    color: var(--ink);
+    cursor: pointer;
+
+    &:hover {
+        background: #1fe8c8;
+    }
+}

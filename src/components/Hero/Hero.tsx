@@ -65,7 +65,7 @@ export default function Hero() {
                 Start a project →
               </motion.a>
               <motion.a
-                href="#portfolio"
+                href="/portfolio"
                 className={`${styles.btn} ${styles.btnGhost}`}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}

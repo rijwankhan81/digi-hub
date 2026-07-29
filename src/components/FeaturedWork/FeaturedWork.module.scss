@@ -1,0 +1,77 @@
+@use "../../styles/breakpoints" as *;
+
+.section {
+    padding: 100px 0;
+    border-bottom: 1px solid var(--ink-line);
+
+    @include respond("sm") {
+        padding: 70px 0;
+    }
+}
+
+.sectionHead {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 48px;
+
+    @include respond("sm") {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 14px;
+
+    &::before {
+        content: "";
+        width: 22px;
+        height: 1px;
+        background: var(--cyan);
+    }
+}
+
+.headText h2 {
+    font-size: clamp(28px, 3.8vw, 40px);
+    font-weight: 600;
+    line-height: 1.15;
+}
+
+.viewAll {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cyan);
+    white-space: nowrap;
+    padding-bottom: 4px;
+
+    &:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px 28px;
+
+    @include respond("xl") {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond("sm") {
+        grid-template-columns: 1fr;
+    }
+}

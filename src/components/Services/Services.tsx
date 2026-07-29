@@ -89,7 +89,7 @@ const SERVICES = [
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const { gsap, ScrollTrigger } = useGsap();
+  const { gsap } = useGsap();
 
   useGSAP(() => {
     const section = sectionRef.current;
@@ -107,7 +107,7 @@ export default function Services() {
         ease: "none",
         scrollTrigger: {
           trigger: section,
-          start: "top top",
+          start: "top-=100 top",
           end: () => `+=${totalScroll}`,
           scrub: 1,
           pin: true,

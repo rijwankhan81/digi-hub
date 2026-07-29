@@ -82,8 +82,8 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={hash("#portfolio")}
-                  className={linkClass(isActive({ hash: "#portfolio" }))}
+                  href="/portfolio"
+                  className={linkClass(isActive({ page: "/portfolio" }))}
                 >
                   Portfolio
                 </a>

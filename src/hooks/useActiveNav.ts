@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 // The homepage sections we scroll-spy on, in document order.
-const SECTION_IDS = ["home", "services", "portfolio", "contact"];
+const SECTION_IDS = ["home", "services", "contact"];
 
 type NavLinkLike =
   | { hash: string; page?: never }

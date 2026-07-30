@@ -31,10 +31,10 @@ export default function AboutHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          Most agencies hand you off between specialists and hope the story
-          survives the relay. We built Digi Hub as one team that owns strategy,
-          content, code and film together — so nothing gets lost in translation
-          between briefs.
+          DiGI Hub is a global One-Stop Business Solutions agency that empowers
+          digital marketing, branding, website development, creative content,
+          AI-powered solutions, and business consulting to build powerful
+          brands, generate quality leads, and accelerate sustainable growth.
         </motion.p>
       </div>
     </section>

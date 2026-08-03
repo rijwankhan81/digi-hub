@@ -20,7 +20,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "Services", hash: "#services" },
   { label: "Portfolio", page: "/portfolio" },
   { label: "Contact Us", page: "/contact" },
-  { label: "Blog", hash: "#blog" },
+  { label: "Blog", page: "/blog" },
 ];
 
 export default function Header() {

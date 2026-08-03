@@ -1,0 +1,24 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="glow" cx="30%" cy="25%" r="70%">
+    <stop offset="0%" stop-color="#00D9B8" stop-opacity="0.16"/>
+    <stop offset="100%" stop-color="#00D9B8" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<rect width="800" height="500" fill="#0B0E13"/>
+<rect width="800" height="500" fill="url(#glow)"/>
+<rect x="160" y="110" width="480" height="300" rx="10" fill="#151A22" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+<rect x="160" y="110" width="480" height="34" rx="10" fill="#151A22"/>
+<rect x="160" y="134" width="480" height="10" fill="#151A22"/>
+<circle cx="182" cy="127.0" r="5" fill="#FFB238" fill-opacity="0.8"/>
+<circle cx="202" cy="127.0" r="5" fill="#00D9B8" fill-opacity="0.5"/>
+<circle cx="222" cy="127.0" r="5" fill="#00D9B8" fill-opacity="0.3"/>
+<rect x="184" y="168" width="150" height="150" rx="6" fill="#00D9B8" fill-opacity="0.16" stroke="#00D9B8" stroke-opacity="0.4" stroke-width="1.2"/>
+<rect x="360" y="168" width="232" height="14" rx="4" fill="rgba(255,255,255,0.08)"/>
+<rect x="360" y="198" width="162.39999999999998" height="14" rx="4" fill="rgba(255,255,255,0.08)"/>
+<rect x="360" y="228" width="162.39999999999998" height="14" rx="4" fill="rgba(255,255,255,0.08)"/>
+<rect x="360" y="258" width="120" height="34" rx="6" fill="#FFB238" fill-opacity="0.85"/>
+<rect x="184.0" y="344" width="133.33333333333334" height="60" rx="6" fill="#0B0E13" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<rect x="333.33333333333337" y="344" width="133.33333333333334" height="60" rx="6" fill="#0B0E13" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<rect x="482.6666666666667" y="344" width="133.33333333333334" height="60" rx="6" fill="#0B0E13" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+</svg>

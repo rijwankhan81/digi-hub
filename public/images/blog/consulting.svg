@@ -1,0 +1,26 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="glow" cx="30%" cy="25%" r="70%">
+    <stop offset="0%" stop-color="#00D9B8" stop-opacity="0.16"/>
+    <stop offset="100%" stop-color="#00D9B8" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<rect width="800" height="500" fill="#0B0E13"/>
+<rect width="800" height="500" fill="url(#glow)"/>
+<line x1="100" y1="400" x2="700" y2="400" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<rect x="140" y="310" width="60" height="90" rx="4" fill="#00D9B8" fill-opacity="0.35"/>
+<rect x="220" y="270" width="60" height="130" rx="4" fill="#00D9B8" fill-opacity="0.40"/>
+<rect x="300" y="290" width="60" height="110" rx="4" fill="#00D9B8" fill-opacity="0.45"/>
+<rect x="380" y="230" width="60" height="170" rx="4" fill="#00D9B8" fill-opacity="0.50"/>
+<rect x="460" y="250" width="60" height="150" rx="4" fill="#00D9B8" fill-opacity="0.55"/>
+<rect x="540" y="190" width="60" height="210" rx="4" fill="#00D9B8" fill-opacity="0.60"/>
+<rect x="620" y="160" width="60" height="240" rx="4" fill="#FFB238" fill-opacity="0.85"/>
+<path d="M 170.0,296 L 250.0,256 L 330.0,276 L 410.0,216 L 490.0,236 L 570.0,176 L 650.0,146" fill="none" stroke="#FFB238" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="170.0" cy="296" r="4" fill="#FFB238"/>
+<circle cx="250.0" cy="256" r="4" fill="#FFB238"/>
+<circle cx="330.0" cy="276" r="4" fill="#FFB238"/>
+<circle cx="410.0" cy="216" r="4" fill="#FFB238"/>
+<circle cx="490.0" cy="236" r="4" fill="#FFB238"/>
+<circle cx="570.0" cy="176" r="4" fill="#FFB238"/>
+<circle cx="650.0" cy="146" r="4" fill="#FFB238"/>
+</svg>

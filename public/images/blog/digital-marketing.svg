@@ -1,0 +1,25 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="glow" cx="30%" cy="25%" r="70%">
+    <stop offset="0%" stop-color="#00D9B8" stop-opacity="0.16"/>
+    <stop offset="100%" stop-color="#00D9B8" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<rect width="800" height="500" fill="#0B0E13"/>
+<rect width="800" height="500" fill="url(#glow)"/>
+<circle cx="300" cy="250" r="60" fill="none" stroke="#00D9B8" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="300" cy="250" r="110" fill="none" stroke="#00D9B8" stroke-opacity="0.46" stroke-width="2"/>
+<circle cx="300" cy="250" r="160" fill="none" stroke="#00D9B8" stroke-opacity="0.37" stroke-width="2"/>
+<circle cx="300" cy="250" r="210" fill="none" stroke="#00D9B8" stroke-opacity="0.28" stroke-width="2"/>
+<circle cx="300" cy="250" r="260" fill="none" stroke="#00D9B8" stroke-opacity="0.19" stroke-width="2"/>
+<circle cx="300" cy="250" r="10" fill="#00D9B8"/>
+<circle cx="560" cy="150" r="7" fill="#FFB238"/>
+<circle cx="560" cy="150" r="14" fill="none" stroke="#FFB238" stroke-opacity="0.4" stroke-width="1.5"/>
+<line x1="300" y1="250" x2="560" y2="150" stroke="#FFB238" stroke-opacity="0.2" stroke-width="1" stroke-dasharray="4 5"/>
+<circle cx="620" cy="300" r="7" fill="#FFB238"/>
+<circle cx="620" cy="300" r="14" fill="none" stroke="#FFB238" stroke-opacity="0.4" stroke-width="1.5"/>
+<line x1="300" y1="250" x2="620" y2="300" stroke="#FFB238" stroke-opacity="0.2" stroke-width="1" stroke-dasharray="4 5"/>
+<circle cx="520" cy="380" r="7" fill="#FFB238"/>
+<circle cx="520" cy="380" r="14" fill="none" stroke="#FFB238" stroke-opacity="0.4" stroke-width="1.5"/>
+<line x1="300" y1="250" x2="520" y2="380" stroke="#FFB238" stroke-opacity="0.2" stroke-width="1" stroke-dasharray="4 5"/>
+</svg>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Footer.module.scss";
 import logo from "../../../public/images/logo.jpg";
 import { useActiveNav } from "@/hooks/useActiveNav";
@@ -14,7 +15,7 @@ export default function Footer() {
   const linkClass = (active: boolean) => (active ? styles.active : undefined);
 
   return (
-    <footer className={styles.footer} id="contact">
+    <footer className={styles.footer} id="footer-cta">
       <div className="wrap">
         <div className={styles.cta}>
           <motion.h2
@@ -103,7 +104,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href={hash("#blog")}>Blog</a>
+                <Link
+                  href="/blog"
+                  className={linkClass(isActive({ page: "/blog" }))}
+                >
+                  Blog
+                </Link>
               </li>
               <li>
                 <a href={hash("#services")}>Careers</a>

@@ -130,24 +130,26 @@ export default function Services() {
             <br />
             One hub.
           </h2>
-          <p className={styles.hint}>Scroll to explore →</p>
         </div>
       </div>
       <div className="wrap">
-        <div className={styles.track} ref={trackRef}>
-          {SERVICES.map((s) => (
-            <div className={styles.panel} key={s.id}>
-              <div className={styles.panelInner}>
-                <div className={styles.panelId}>{s.id}</div>
-                <h3>{s.name}</h3>
-                <ul>
-                  {s.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+        <div className={styles.trackContainer}>
+          <p className={styles.hint}>Scroll to explore →</p>
+          <div className={styles.track} ref={trackRef}>
+            {SERVICES.map((s) => (
+              <div className={styles.panel} key={s.id}>
+                <div className={styles.panelInner}>
+                  <div className={styles.panelId}>{s.id}</div>
+                  <h3>{s.name}</h3>
+                  <ul>
+                    {s.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

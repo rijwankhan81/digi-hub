@@ -16,7 +16,7 @@
     overflow: visible;
 
     @include respond("sm") {
-      width: 90%;
+      width: 80%;
       margin: auto;
     }
   }
@@ -24,7 +24,7 @@
 
 .label {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 18px;
   fill: var(--text-dim);
 }
 

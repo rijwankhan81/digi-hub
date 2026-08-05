@@ -6,6 +6,7 @@ import Link from "next/link";
 import styles from "./Footer.module.scss";
 import logo from "../../../public/images/logo.jpg";
 import { useActiveNav } from "@/hooks/useActiveNav";
+import MagneticButton from "../MagneticButton/MagneticButton";
 
 const OFFICES = ["Bangladesh", "Dubai", "Mexico"];
 
@@ -26,18 +27,20 @@ export default function Footer() {
           >
             Let&apos;s plug your business into the hub.
           </motion.h2>
-          <motion.a
-            href="mailto:hello@digihub.agency"
-            className={`${styles.btn} ${styles.btnPrimary}`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            hello@digihub.agency →
-          </motion.a>
+          <MagneticButton>
+            <motion.a
+              href="mailto:hello@digihub.agency"
+              className={`${styles.btn} ${styles.btnPrimary}`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              hello@digihub.agency →
+            </motion.a>
+          </MagneticButton>
         </div>
 
         <div className={styles.grid}>

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import SmoothScroll from "@/hooks/SmoothScroll";
+import CustomCursor from "@/components/CustomCursor/CustomCursor";
+import GrainOverlay from "@/components/GrainOverlay/GrainOverlay";
+import Preloader from "@/components/Preloader/Preloader";
 
 export const metadata: Metadata = {
   title: "Digi Hub — One Hub. Every Channel.",
@@ -42,6 +45,9 @@ export default function RootLayout({
         ></link>
       </head>
       <body>
+        <Preloader />
+        <CustomCursor />
+        <GrainOverlay />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

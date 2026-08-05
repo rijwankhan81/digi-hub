@@ -4,6 +4,7 @@ import { motion, type Variants } from "framer-motion";
 import styles from "./Hero.module.scss";
 import HubDiagram from "../HubDiagram/HubDiagram";
 import RevealText from "../Revealtext/Revealtext";
+import MagneticButton from "../MagneticButton/MagneticButton";
 
 const container: Variants = {
   hidden: {},
@@ -56,22 +57,26 @@ export default function Hero() {
             </motion.p>
 
             <motion.div variants={item} className={styles.ctas}>
-              <motion.a
-                href="/contact"
-                className={`${styles.btn} ${styles.btnPrimary}`}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Start a project →
-              </motion.a>
-              <motion.a
-                href="/portfolio"
-                className={`${styles.btn} ${styles.btnGhost}`}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                See our work
-              </motion.a>
+              <MagneticButton>
+                <motion.a
+                  href="/contact"
+                  className={`${styles.btn} ${styles.btnPrimary}`}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  Start a project →
+                </motion.a>
+              </MagneticButton>
+              <MagneticButton>
+                <motion.a
+                  href="/portfolio"
+                  className={`${styles.btn} ${styles.btnGhost}`}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  See our work
+                </motion.a>
+              </MagneticButton>
             </motion.div>
           </motion.div>
         </div>

@@ -1,0 +1,100 @@
+.ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 56px;
+    height: 56px;
+
+    border: 1.5px solid var(--cyan);
+    border-radius: 50%;
+
+    background: rgba(0, 217, 184, 0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: none;
+    user-select: none;
+
+    z-index: 999999;
+
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+
+    transition:
+        border-color .3s ease,
+        background .3s ease,
+        box-shadow .3s ease;
+}
+
+.dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+    background: var(--cyan);
+
+    pointer-events: none;
+    user-select: none;
+
+    z-index: 1000000;
+
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+
+    box-shadow:
+        0 0 10px rgba(0, 217, 184, .45),
+        0 0 22px rgba(0, 217, 184, .18);
+}
+
+.text {
+    color: var(--paper);
+
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+    user-select: none;
+
+    will-change: transform, opacity;
+}
+
+
+
+/* Disable on touch devices */
+
+@media (hover: none),
+(pointer: coarse) {
+
+    .ring,
+    .dot {
+        display: none;
+    }
+
+
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ring,
+    .dot {
+        display: none;
+    }
+
+
+}

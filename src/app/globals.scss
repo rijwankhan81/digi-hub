@@ -3,3 +3,8 @@
 // common.scss  → resets, element defaults, shared utility classes
 @use "../styles/tokens";
 @use "../styles/common";
+
+html.cursor-none,
+html.cursor-none * {
+    cursor: none !important;
+}

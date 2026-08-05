@@ -1,6 +1,7 @@
 // Common base styles — resets, element defaults, and shared utility
 // classes used across the site. Tokens (colors/fonts/spacing) live in
 // tokens.scss; this file only consumes them via var(--token-name).
+
 @use "breakpoints" as *;
 
 * {
@@ -53,13 +54,21 @@ button:focus-visible {
     outline-offset: 3px;
 }
 
+// Toggled by CustomCursor (plain class, not a CSS module) once it
+// confirms a fine-pointer, non-touch device — hides the native cursor
+// so the custom dot + ring take over.
+body.cursor-none,
+body.cursor-none * {
+    cursor: none !important;
+}
+
 // Shared content-width wrapper, used by every section.
 .wrap {
     max-width: var(--maxw);
     margin: 0 auto;
     padding: 0 32px;
 
-    @media (max-width: 560px) {
+    @include respond("sm") {
         padding: 0 20px;
     }
 }

@@ -1,193 +1,695 @@
 @use "../../styles/breakpoints" as *;
 
+/* ==========================================================
+   HEADER
+========================================================== */
+
 .header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: background 0.35s ease, border-color 0.35s ease,
-    backdrop-filter 0.35s ease;
 
-  &.scrolled {
-    background: rgba(11, 14, 19, 0.72);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--ink-line);
+  top: 20px;
+  left: 50%;
+
+  transform: translateX(-50%) !important;
+
+  width: min(calc(100% - 40px), 1280px);
+
+  z-index: 999;
+
+  transition:
+    all .45s ease;
+
+  @include respond("lg") {
+
+    top: 14px;
+
+    width: calc(100% - 24px);
+
   }
+
 }
+
+.scrolled {
+
+  .inner {
+
+    background: rgba(10, 14, 20, .72);
+
+    backdrop-filter: blur(24px);
+
+    -webkit-backdrop-filter: blur(24px);
+
+    border-color: rgba(255, 255, 255, .08);
+
+    box-shadow:
+      0 18px 70px rgba(0, 0, 0, .38);
+
+  }
+
+}
+
+/* ==========================================================
+   INNER
+========================================================== */
 
 .inner {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 0 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 72px;
 
-  @include respond("sm") {
-    padding: 0 20px;
-  }
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  height: 74px;
+
+  padding-inline: 24px;
+
+  border-radius: 999px;
+
+  border: 1px solid transparent;
+
+  background: rgba(15, 18, 24, .38);
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  transition: .35s;
+
 }
 
+/* ==========================================================
+   LOGO
+========================================================== */
+
 .logo {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 19px;
-  letter-spacing: -0.02em;
-  display: flex;
+
+  display: inline-flex;
+
   align-items: center;
-  gap: 10px;
+
+  gap: 12px;
+
   color: var(--paper);
+
+  text-decoration: none;
+
+  font-family: var(--font-display);
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  letter-spacing: -.02em;
+
 }
 
 .logoImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+
+  width: 42px;
+
+  height: 42px;
+
   overflow: hidden;
-  display: block;
+
+  border-radius: 50%;
+
   flex-shrink: 0;
-  box-shadow: 0 0 0 1px var(--ink-line);
+
+  border: 1px solid rgba(255, 255, 255, .08);
+
+  box-shadow:
+
+    0 0 0 4px rgba(255, 255, 255, .03);
 
   img {
+
     width: 100%;
+
     height: 100%;
+
     object-fit: cover;
+
   }
+
 }
+
+/* ==========================================================
+   DESKTOP NAV
+========================================================== */
 
 .nav {
-  ul {
-    list-style: none;
-    display: flex;
-    gap: 36px;
-    margin: 0;
-    padding: 0;
-  }
-
-  a {
-    font-size: 14px;
-    color: var(--text-dim);
-    font-weight: 500;
-    position: relative;
-    padding: 4px 0;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: var(--paper);
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      width: 0;
-      height: 1px;
-      background: var(--cyan);
-      transition: width 0.25s ease;
-    }
-
-    &:hover::after {
-      width: 100%;
-    }
-
-    &.active {
-      color: var(--paper);
-    }
-
-    &.active::after {
-      width: 100%;
-    }
-  }
 
   @include respond("lg") {
+
     display: none;
+
   }
+
 }
 
-.toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 26px;
-  height: 20px;
-  position: relative;
+.nav ul {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  list-style: none;
+
+  margin: 0;
+
   padding: 0;
 
-  @include respond("lg") {
-    display: block;
-  }
 }
 
-.bar,
-.barOpen1,
-.barOpen2 {
+.nav li {
+
+  position: relative;
+
+}
+
+.nav a,
+
+.dropdownTrigger {
+
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+
+
+  padding-inline: 18px;
+
+  border: none;
+
+  background: none;
+
+  color: var(--text-dim);
+
+  cursor: pointer;
+
+  border-radius: 999px;
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+
+    color .3s,
+
+    background .3s;
+
+}
+
+.nav a:hover,
+
+.dropdownTrigger:hover {
+
+  color: var(--paper);
+
+  background: rgba(255, 255, 255, .05);
+
+}
+
+.active {
+
+  color: var(--paper) !important;
+
+  background:
+
+    rgba(255, 255, 255, .06);
+
+}
+
+/* ==========================================================
+   CHEVRON
+========================================================== */
+
+.dropdownTrigger svg {
+
+  transition:
+
+    transform .3s;
+
+}
+
+.chevronOpen {
+
+  transform: rotate(180deg);
+
+}
+
+/* ==========================================================
+   DROPDOWN
+========================================================== */
+
+.hasDropdown {
+
+  position: relative;
+
+}
+
+.dropdown {
+
   position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--paper);
-  transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
-}
 
-.bar {
-  &:first-child {
-    top: 4px;
-  }
-}
+  top: calc(100% + 16px);
 
-.toggle .bar:nth-child(1) {
-  top: 4px;
-}
+  left: 50%;
 
-.toggle .bar:nth-child(2) {
-  top: 14px;
-}
+  transform: translateX(-50%) !important;
 
-.barOpen1 {
-  top: 9px;
-  transform: rotate(45deg);
-}
+  width: 720px;
 
-.barOpen2 {
-  top: 9px;
-  transform: rotate(-45deg);
-}
+  border-radius: 28px;
 
-.mobileNav {
   overflow: hidden;
-  background: var(--ink);
-  border-bottom: 1px solid var(--ink-line);
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 8px 32px 20px;
-    display: flex;
-    flex-direction: column;
+  background:
 
-    @include respond("sm") {
-      padding: 8px 20px 20px;
+    rgba(12, 15, 20, .86);
+
+  backdrop-filter: blur(28px);
+
+  -webkit-backdrop-filter: blur(28px);
+
+  border:
+
+    1px solid rgba(255, 255, 255, .08);
+
+  box-shadow:
+
+    0 40px 120px rgba(0, 0, 0, .45);
+
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.dropdownGrid {
+
+  display: grid;
+
+  grid-template-columns:
+
+    repeat(2, 1fr);
+
+  gap: 8px;
+
+  padding: 22px;
+
+}
+
+/* ==========================================================
+   MEGA MENU ITEMS
+========================================================== */
+
+.dropdownItem {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  overflow: hidden;
+
+  transition:
+    background .35s ease,
+    transform .35s ease,
+    border-color .35s ease;
+
+  border: 1px solid transparent;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+      radial-gradient(circle at top left,
+        color-mix(in srgb, var(--cyan) 10%, transparent),
+        transparent 65%);
+
+    opacity: 0;
+
+    transition: opacity .35s ease;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(255, 255, 255, .08);
+
+    background: rgba(255, 255, 255, .035);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .dropdownArrow {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    .dropdownIcon {
+      transform: scale(1.08) rotate(-6deg);
     }
   }
+}
 
-  li {
-    border-bottom: 1px solid var(--ink-line);
+/* ==========================================================
+   ICON
+========================================================== */
+
+.dropdownIcon {
+  width: 54px;
+  height: 54px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, .05);
+
+  border: 1px solid rgba(255, 255, 255, .08);
+
+  transition: .35s ease;
+
+  svg {
+    stroke-width: 2;
   }
+}
 
-  a {
-    display: block;
-    padding: 16px 0;
-    font-size: 16px;
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.dropdownContent {
+  flex: 1;
+  min-width: 0;
+
+  h4 {
+    margin: 0;
+
     color: var(--paper);
 
-    &.active {
-      color: var(--cyan);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 6px 0 0;
+
+    color: var(--text-dim);
+
+    font-size: 13px;
+    line-height: 1.55;
+  }
+}
+
+/* ==========================================================
+   ARROW
+========================================================== */
+
+.dropdownArrow {
+  opacity: 0;
+
+  color: var(--paper);
+
+  transition: .3s ease;
+
+  flex-shrink: 0;
+}
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.dropdownFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 24px;
+
+  border-top: 1px solid rgba(255, 255, 255, .06);
+
+  color: var(--paper);
+
+  text-decoration: none;
+
+  transition: .3s ease;
+
+  &:hover {
+    color: var(--cyan);
+
+    svg {
+      transform: translateX(5px);
     }
+  }
+
+  svg {
+    transition: transform .3s ease;
+  }
+}
+
+/* ==========================================================
+   MENU BUTTON
+========================================================== */
+
+.menuButton {
+  display: none;
+
+  width: 46px;
+  height: 46px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, .08);
+
+  background: rgba(255, 255, 255, .04);
+
+  color: var(--paper);
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: .3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, .08);
+  }
+
+  @include respond("lg") {
+    display: inline-flex;
+  }
+}
+
+/* ==========================================================
+   MOBILE NAV
+========================================================== */
+
+.mobileNav {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0px);
+
+  @include respond("lg") {
+    display: block;
+
+    margin-top: 14px;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    background: rgba(10, 14, 20, .92);
+
+    backdrop-filter: blur(24px);
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    box-shadow: 0 25px 80px rgba(0, 0, 0, .35);
+
+    ul {
+      margin: 0;
+      padding: 12px;
+
+      list-style: none;
+    }
+
+    li+li {
+      margin-top: 6px;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+
+      padding: 15px 16px;
+
+      border-radius: 14px;
+
+      color: var(--paper);
+
+      text-decoration: none;
+
+      transition: .25s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, .05);
+      }
+    }
+  }
+}
+
+/* ==========================================================
+   MOBILE DROPDOWN
+========================================================== */
+
+.mobileDropdownTrigger {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px 16px;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--paper);
+
+  cursor: pointer;
+
+  border-radius: 14px;
+
+  transition: .25s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, .05);
+  }
+}
+
+.mobileDropdownMenu {
+  overflow: hidden;
+
+  padding: 0 0 10px;
+}
+
+.mobileService {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+
+  margin: 4px 12px;
+  padding: 12px 14px !important;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+
+  color: var(--text-dim) !important;
+
+  &:hover {
+    color: var(--paper) !important;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.mobileAllServices {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 10px 12px 0;
+
+  padding: 14px 16px !important;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, .04);
+
+  color: var(--cyan) !important;
+
+  font-weight: 600;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@include respond("md") {
+
+  .inner {
+    padding-inline: 18px;
+
+    height: 68px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .logoImg {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@include respond("sm") {
+
+  .header {
+    top: 10px;
+
+    width: calc(100% - 16px);
+  }
+
+  .inner {
+    padding-inline: 14px;
+
+    height: 64px;
+  }
+
+  .logo {
+    font-size: 17px;
+  }
+
+  .logoImg {
+    width: 34px;
+    height: 34px;
   }
 }

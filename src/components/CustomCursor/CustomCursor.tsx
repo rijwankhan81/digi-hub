@@ -1,223 +1,109 @@
 "use client";
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useRef, useState } from "react";
 import { useGsap } from "@/lib/gsap";
 import styles from "./CustomCursor.module.scss";
 
-const HOVER_SELECTOR = `
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  label,
-  [role="button"],
-  [data-cursor-hover]
-`;
+const HOVER_SELECTOR = "a, button, [data-cursor-hover]";
 
+/**
+ * A dot + trailing ring that replace the native cursor on desktop
+ * (fine-pointer) devices, with the ring growing over interactive
+ * elements. Purely a polish layer — the site works identically without
+ * it, so it no-ops on touch devices and prefers-reduced-motion.
+ */
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLSpanElement>(null);
-
   const { gsap } = useGsap();
+  const [enabled, setEnabled] = useState(false);
 
-  useGSAP(
-    () => {
-      const dot = dotRef.current;
-      const ring = ringRef.current;
-      const text = textRef.current;
+  useEffect(() => {
+    const hasFinePointer = window.matchMedia(
+      "(hover: hover) and (pointer: fine)",
+    ).matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const shouldEnable = hasFinePointer && !prefersReducedMotion;
+    setEnabled(shouldEnable);
 
-      if (!dot || !ring || !text) return;
+    // Injected directly (rather than relying on a global stylesheet edit
+    // elsewhere) so this component is self-contained. Plain elements
+    // often have their own explicit `cursor: pointer` (buttons, links),
+    // which an inherited value can never override — only a wildcard
+    // !important rule like this actually wins everywhere.
+    let styleEl: HTMLStyleElement | null = null;
+    if (shouldEnable) {
+      styleEl = document.createElement("style");
+      styleEl.setAttribute("data-custom-cursor", "");
+      styleEl.textContent = "body, body * { cursor: none !important; }";
+      document.head.appendChild(styleEl);
+    }
 
-      const canHover = window.matchMedia(
-        "(hover: hover) and (pointer: fine)",
-      ).matches;
+    return () => {
+      styleEl?.remove();
+    };
+  }, []);
 
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
+  useEffect(() => {
+    if (!enabled) return;
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
 
-      if (!canHover || reduceMotion) return;
+    const dotX = gsap.quickTo(dot, "x", { duration: 0.12, ease: "power3" });
+    const dotY = gsap.quickTo(dot, "y", { duration: 0.12, ease: "power3" });
+    const ringX = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3" });
+    const ringY = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3" });
 
-      document.documentElement.classList.add("cursor-none");
+    const onMove = (e: MouseEvent) => {
+      dotX(e.clientX);
+      dotY(e.clientY);
+      ringX(e.clientX);
+      ringY(e.clientY);
+    };
 
-      gsap.set([dot, ring], {
-        xPercent: -50,
-        yPercent: -50,
-        opacity: 0,
-      });
+    const onOver = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest?.(HOVER_SELECTOR)) {
+        ring.classList.add(styles.ringHover);
+        dot.classList.add(styles.dotHover);
+      }
+    };
+    const onOut = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest?.(HOVER_SELECTOR)) {
+        ring.classList.remove(styles.ringHover);
+        dot.classList.remove(styles.dotHover);
+      }
+    };
+    const onLeaveWindow = () => {
+      gsap.to([dot, ring], { opacity: 0, duration: 0.2 });
+    };
+    const onEnterWindow = () => {
+      gsap.to([dot, ring], { opacity: 1, duration: 0.2 });
+    };
 
-      gsap.set(text, {
-        opacity: 0,
-        scale: 0.8,
-      });
+    window.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mouseout", onOut);
+    document.addEventListener("mouseleave", onLeaveWindow);
+    document.addEventListener("mouseenter", onEnterWindow);
 
-      const dotX = gsap.quickTo(dot, "x", {
-        duration: 0.08,
-        ease: "power3.out",
-      });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
+      document.removeEventListener("mouseleave", onLeaveWindow);
+      document.removeEventListener("mouseenter", onEnterWindow);
+    };
+  }, [enabled, gsap]);
 
-      const dotY = gsap.quickTo(dot, "y", {
-        duration: 0.08,
-        ease: "power3.out",
-      });
-
-      const ringX = gsap.quickTo(ring, "x", {
-        duration: 0.28,
-        ease: "power3.out",
-      });
-
-      const ringY = gsap.quickTo(ring, "y", {
-        duration: 0.28,
-        ease: "power3.out",
-      });
-
-      let visible = false;
-
-      const showCursor = () => {
-        if (visible) return;
-
-        visible = true;
-
-        gsap.to([dot, ring], {
-          opacity: 1,
-          duration: 0.2,
-          overwrite: true,
-        });
-      };
-
-      const hideCursor = () => {
-        visible = false;
-
-        gsap.to([dot, ring], {
-          opacity: 0,
-          duration: 0.2,
-          overwrite: true,
-        });
-      };
-
-      const move = (e: PointerEvent) => {
-        showCursor();
-
-        dotX(e.clientX);
-        dotY(e.clientY);
-
-        ringX(e.clientX);
-        ringY(e.clientY);
-      };
-
-      const pointerOver = (e: PointerEvent) => {
-        const target = (e.target as HTMLElement)?.closest(
-          HOVER_SELECTOR,
-        ) as HTMLElement | null;
-
-        if (!target) return;
-
-        const scale = Number(target.dataset.cursorScale ?? "1.8");
-
-        gsap.to(ring, {
-          scale,
-          duration: 0.25,
-          ease: "power3.out",
-          overwrite: true,
-        });
-
-        gsap.to(dot, {
-          scale: 0,
-          duration: 0.18,
-          overwrite: true,
-        });
-
-        const label = target.dataset.cursorText;
-
-        if (label) {
-          text.textContent = label;
-
-          gsap.to(text, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.2,
-            overwrite: true,
-          });
-        }
-      };
-
-      const pointerOut = (e: PointerEvent) => {
-        const target = (e.target as HTMLElement)?.closest(
-          HOVER_SELECTOR,
-        ) as HTMLElement | null;
-
-        if (!target) return;
-
-        gsap.to(ring, {
-          scale: 1,
-          duration: 0.25,
-          ease: "power3.out",
-          overwrite: true,
-        });
-
-        gsap.to(dot, {
-          scale: 1,
-          duration: 0.2,
-          overwrite: true,
-        });
-
-        gsap.to(text, {
-          opacity: 0,
-          scale: 0.8,
-          duration: 0.15,
-          overwrite: true,
-        });
-      };
-
-      const leaveWindow = (e: MouseEvent) => {
-        if (!e.relatedTarget) {
-          hideCursor();
-        }
-      };
-
-      const visibility = () => {
-        if (document.hidden) {
-          hideCursor();
-        }
-      };
-
-      window.addEventListener("pointermove", move);
-
-      document.addEventListener("pointerover", pointerOver);
-      document.addEventListener("pointerout", pointerOut);
-
-      window.addEventListener("mouseout", leaveWindow);
-
-      document.addEventListener("visibilitychange", visibility);
-
-      return () => {
-        document.documentElement.classList.remove("cursor-none");
-
-        window.removeEventListener("pointermove", move);
-
-        document.removeEventListener("pointerover", pointerOver);
-        document.removeEventListener("pointerout", pointerOut);
-
-        window.removeEventListener("mouseout", leaveWindow);
-
-        document.removeEventListener("visibilitychange", visibility);
-      };
-    },
-    {
-      dependencies: [gsap],
-    },
-  );
+  if (!enabled) return null;
 
   return (
     <>
-      <div ref={ringRef} className={styles.ring}>
-        <span ref={textRef} className={styles.text} />
-      </div>
-
       <div ref={dotRef} className={styles.dot} />
+      <div ref={ringRef} className={styles.ring} />
     </>
   );
 }

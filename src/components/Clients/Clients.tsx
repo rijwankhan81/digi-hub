@@ -72,7 +72,7 @@ export default function Clients() {
     <section className={styles.clients}>
       <div className="wrap">
         <div className={styles.sectionHead}>
-          <span>Trusted across industries</span>
+          <span className={styles.eyebrow}>Trusted across industries</span>
           <h2>Our Clients</h2>
         </div>
 

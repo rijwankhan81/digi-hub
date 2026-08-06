@@ -19,6 +19,7 @@
     text-transform: uppercase;
     color: var(--cyan);
     margin-bottom: 14px;
+    font-weight: 600;
 
     &::before {
         content: "";
@@ -33,9 +34,15 @@
     margin-bottom: 56px;
 
     h2 {
-        font-size: clamp(28px, 3.8vw, 40px);
-        font-weight: 600;
-        line-height: 1.15;
+        font-size: 70px;
+        line-height: 0.92;
+        font-weight: 700;
+        letter-spacing: -3px;
+        max-width: 900px;
+
+        @include respond("sm") {
+            font-size: 50px;
+        }
     }
 }
 

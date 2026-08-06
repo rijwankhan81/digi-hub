@@ -3,6 +3,7 @@
 // common.scss  → resets, element defaults, shared utility classes
 @use "../styles/tokens";
 @use "../styles/common";
+@use "../styles/buttons";
 
 html.cursor-none,
 html.cursor-none * {

@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { ArrowUpRight, Play, Image as ImageIcon } from "lucide-react";
+
 import styles from "./PortfolioCard.module.scss";
 import type { PortfolioItem } from "@/data/portfolio";
 
@@ -27,61 +30,125 @@ export default function PortfolioCard({
 }: PortfolioCardProps) {
   const accent = CATEGORY_ACCENTS[item.category] ?? "var(--cyan)";
 
+  const [rotate, setRotate] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  function handleMove(e: React.MouseEvent<HTMLButtonElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+
+    setRotate({
+      x: (0.5 - py) * 10,
+      y: (px - 0.5) * 10,
+    });
+  }
+
+  function resetTilt() {
+    setRotate({
+      x: 0,
+      y: 0,
+    });
+  }
+
   return (
     <motion.button
       type="button"
       className={styles.card}
       onClick={() => onOpen?.(item)}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{
-        duration: 0.5,
-        delay: (index % 4) * 0.08,
-        ease: [0.22, 1, 0.36, 1],
+      onMouseMove={handleMove}
+      onMouseLeave={resetTilt}
+      initial={{
+        opacity: 0,
+        y: 40,
       }}
-      whileHover="hover"
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.25,
+      }}
+      transition={{
+        duration: 0.7,
+        delay: (index % 3) * 0.08,
+      }}
+      style={
+        {
+          "--accent": accent,
+          "--rx": `${rotate.x}deg`,
+          "--ry": `${rotate.y}deg`,
+        } as React.CSSProperties
+      }
     >
-      <div className={styles.media} style={{ ["--accent" as string]: accent }}>
+      {/* Background */}
+
+      <div className={styles.mesh}></div>
+
+      <div className={styles.noise}></div>
+
+      <div className={styles.shine}></div>
+
+      {/* ========================================= */}
+
+      <div className={styles.preview}>
         <motion.div
-          className={styles.mediaGlow}
-          variants={{ hover: { scale: 1.06 } }}
-          transition={{ duration: 0.5 }}
+          className={styles.previewGlow}
+          whileHover={{
+            scale: 1.15,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
         />
-        <span className={styles.mediaIcon}>
+
+        <div className={styles.previewIcon}>
           {item.type === "video" ? (
-            <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
-              <path d="M1 1L19 12L1 23V1Z" fill="var(--paper)" />
-            </svg>
+            <Play size={34} fill="currentColor" />
           ) : (
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-              <rect
-                x="2"
-                y="4"
-                width="20"
-                height="16"
-                rx="2"
-                stroke="var(--paper)"
-                strokeWidth="1.6"
-              />
-              <circle cx="8" cy="10" r="1.8" fill="var(--paper)" />
-              <path
-                d="M3 17L8.5 12.5L12 15.5L16 11L21 16"
-                stroke="var(--paper)"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <ImageIcon size={34} />
           )}
-        </span>
-        <span className={styles.mediaType}>{item.type}</span>
+        </div>
+
+        <div className={styles.liveBadge}>
+          <span></span>
+          Live Preview
+        </div>
+
+        <div className={styles.projectNumber}>
+          {(index + 1).toString().padStart(2, "0")}
+        </div>
       </div>
 
-      <div className={styles.body}>
-        <span className={styles.tag}>{item.category}</span>
+      {/* ========================================= */}
+
+      <div className={styles.content}>
+        <div className={styles.topRow}>
+          <span className={styles.category}>{item.category}</span>
+
+          <span className={styles.type}>{item.type}</span>
+        </div>
+
         <h3>{item.title}</h3>
+
         <p>{item.description}</p>
+
+        <div className={styles.footer}>
+          <span className={styles.link}>View Case Study</span>
+
+          <motion.span
+            whileHover={{
+              x: 5,
+              y: -5,
+            }}
+          >
+            <ArrowUpRight size={20} />
+          </motion.span>
+        </div>
       </div>
     </motion.button>
   );

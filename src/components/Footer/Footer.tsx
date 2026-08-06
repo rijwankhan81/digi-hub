@@ -27,20 +27,19 @@ export default function Footer() {
           >
             Let&apos;s plug your business into the hub.
           </motion.h2>
-          <MagneticButton>
-            <motion.a
-              href="mailto:hello@digihub.agency"
-              className={`${styles.btn} ${styles.btnPrimary}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              hello@digihub.agency →
-            </motion.a>
-          </MagneticButton>
+
+          <motion.a
+            href="mailto:hello@digihub.agency"
+            className="btn btn-primary"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            hello@digihub.agency →
+          </motion.a>
         </div>
 
         <div className={styles.grid}>

@@ -24,4 +24,46 @@
     --font-display: "Space Grotesk", sans-serif;
     --font-body: "IBM Plex Sans", sans-serif;
     --font-mono: "IBM Plex Mono", monospace;
+
+    /* Surface */
+
+    --surface: color-mix(in srgb, var(--paper) 4%, transparent);
+    --surface-2: color-mix(in srgb, var(--paper) 7%, transparent);
+    --surface-3: color-mix(in srgb, var(--paper) 10%, transparent);
+
+    /* Glass */
+
+    --glass-bg: rgba(255, 255, 255, .05);
+    --glass-border: rgba(255, 255, 255, .08);
+    --glass-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+
+    /* Glow */
+
+    --cyan-glow: rgba(0, 217, 184, .25);
+    --amber-glow: rgba(255, 178, 56, .20);
+
+    /* Radius */
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 28px;
+    --radius-xl: 40px;
+    --radius-pill: 999px;
+
+    /* Transition */
+
+    --ease: cubic-bezier(.22, .61, .36, 1);
+    --speed-fast: .25s;
+    --speed: .45s;
+    --speed-slow: .8s;
+
+    /* Blur */
+
+    --blur: 18px;
+
+    /* Shadows */
+
+    --shadow-sm: 0 8px 20px rgba(0, 0, 0, .18);
+    --shadow-md: 0 20px 50px rgba(0, 0, 0, .30);
+    --shadow-lg: 0 40px 120px rgba(0, 0, 0, .50);
 }

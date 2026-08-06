@@ -33,6 +33,7 @@
     text-transform: uppercase;
     color: var(--cyan);
     margin-bottom: 14px;
+    font-weight: 700;
 
     &::before {
         content: "";
@@ -43,9 +44,15 @@
 }
 
 .headText h2 {
-    font-size: clamp(28px, 3.8vw, 40px);
-    font-weight: 600;
-    line-height: 1.15;
+    font-size: 70px;
+    line-height: 0.92;
+    font-weight: 700;
+    letter-spacing: -3px;
+    max-width: 900px;
+
+    @include respond("sm") {
+        font-size: 50px;
+    }
 }
 
 .viewAll {
@@ -66,6 +73,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 36px 28px;
+    align-items: flex-start;
 
     @include respond("xl") {
         grid-template-columns: repeat(2, 1fr);

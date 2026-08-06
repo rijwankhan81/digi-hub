@@ -1,0 +1,449 @@
+@use "../../../styles/breakpoints" as *;
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.section {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 120px 0;
+
+    background:
+        linear-gradient(180deg,
+            var(--ink) 0%,
+            var(--ink-soft) 100%);
+
+    border-bottom: 1px solid var(--ink-line);
+
+    isolation: isolate;
+
+    @include respond("lg") {
+        padding: 90px 0;
+    }
+
+    @include respond("sm") {
+        padding: 70px 0;
+    }
+}
+
+/* ==========================================================
+   BACKGROUND GRID
+========================================================== */
+
+.section::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .18;
+
+    background-image:
+        linear-gradient(rgba(255, 255, 255, .04) 1px,
+            transparent 1px),
+        linear-gradient(90deg,
+            rgba(255, 255, 255, .04) 1px,
+            transparent 1px);
+
+    background-size: 72px 72px;
+
+    mask-image:
+        radial-gradient(circle,
+            black,
+            transparent 94%);
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.header {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 760px;
+
+    margin: 0 auto 80px;
+
+    text-align: center;
+
+    @include respond("sm") {
+        margin-bottom: 55px;
+    }
+}
+
+/* ==========================================================
+   EYEBROW
+========================================================== */
+
+.eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 24px;
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, .04);
+
+    border:
+        1px solid rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(18px);
+
+    color: var(--cyan);
+
+    font-family: var(--font-mono);
+
+    font-size: 12px;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+
+    &::before {
+        content: "";
+
+        width: 8px;
+        height: 8px;
+
+        border-radius: 50%;
+
+        background: var(--cyan);
+
+        box-shadow:
+            0 0 14px var(--cyan);
+    }
+}
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.header h2 {
+    margin: 0;
+
+    color: var(--paper);
+
+    font-family: var(--font-display);
+
+    font-size: clamp(42px, 5vw, 64px);
+
+    line-height: 1.05;
+
+    letter-spacing: -.04em;
+}
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.header p {
+    margin: 24px auto 0;
+
+    max-width: 620px;
+
+    color: var(--text-dim);
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    @include respond("sm") {
+        font-size: 16px;
+    }
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 28px;
+
+    @include respond("lg") {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond("sm") {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 40px 34px;
+
+    border-radius: 28px;
+
+    border:
+        1px solid rgba(255, 255, 255, .08);
+
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, .05),
+            rgba(255, 255, 255, .025));
+
+    backdrop-filter: blur(22px);
+
+    -webkit-backdrop-filter: blur(22px);
+
+    transition:
+        transform .45s ease,
+        border-color .45s ease,
+        box-shadow .45s ease;
+
+    isolation: isolate;
+
+    @include respond("sm") {
+        padding: 28px;
+        border-radius: 22px;
+    }
+
+    &:hover {
+        transform:
+            translateY(-10px);
+
+        border-color:
+            rgba(255, 255, 255, .16);
+
+        box-shadow:
+            0 25px 80px rgba(0, 0, 0, .35);
+    }
+}
+
+/* ==========================================================
+   CARD GLOW
+========================================================== */
+
+.glow {
+    position: absolute;
+
+    width: 240px;
+
+    height: 240px;
+
+    top: -110px;
+
+    right: -110px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle,
+            rgba(0, 217, 184, .18),
+            transparent 72%);
+
+    filter: blur(60px);
+
+    opacity: 0;
+
+    transition: opacity .45s ease;
+
+    pointer-events: none;
+}
+
+.card:hover .glow {
+    opacity: 1;
+}
+
+/* ==========================================================
+   COUNTER
+========================================================== */
+
+.card h3 {
+    position: relative;
+
+    margin: 0;
+
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+
+    font-family: var(--font-display);
+
+    font-size: clamp(54px, 7vw, 78px);
+
+    font-weight: 700;
+
+    line-height: .9;
+
+    letter-spacing: -.05em;
+
+    color: var(--paper);
+
+    text-shadow:
+        0 0 22px rgba(255, 255, 255, .08);
+}
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+.card span {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    color: var(--text-dim);
+
+    font-size: 30px;
+
+    line-height: 1.6;
+
+    transition:
+        color .35s ease,
+        transform .35s ease;
+}
+
+.card:hover span {
+    color: var(--paper);
+
+    transform: translateX(4px);
+}
+
+/* ==========================================================
+   TOP BORDER
+========================================================== */
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 2px;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            var(--cyan),
+            var(--amber),
+            transparent);
+
+    transform: scaleX(.2);
+
+    opacity: 0;
+
+    transition:
+        transform .45s ease,
+        opacity .45s ease;
+}
+
+.card:hover::before {
+    transform: scaleX(1);
+
+    opacity: 1;
+}
+
+/* ==========================================================
+   PREMIUM SHINE
+========================================================== */
+
+.card::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -150%;
+
+    width: 60%;
+    height: 100%;
+
+    transform: skewX(-22deg);
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, .14),
+            transparent);
+
+    transition: left .9s ease;
+}
+
+.card:hover::after {
+    left: 180%;
+}
+
+/* ==========================================================
+   HOVER STATE
+========================================================== */
+
+.card:hover {
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, .07),
+            rgba(255, 255, 255, .035));
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@include respond("md") {
+
+    .card {
+        padding: 34px;
+    }
+
+    .card h3 {
+        font-size: clamp(46px, 7vw, 64px);
+    }
+
+    .card span {
+        font-size: 26px;
+    }
+
+}
+
+@include respond("sm") {
+
+    .grid {
+        gap: 18px;
+    }
+
+    .card {
+        padding: 24px;
+
+        border-radius: 20px;
+    }
+
+    .card h3 {
+        font-size: 46px;
+    }
+
+    .card span {
+        margin-top: 20px;
+
+        font-size: 13px;
+    }
+
+}

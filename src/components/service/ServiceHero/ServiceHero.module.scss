@@ -1,0 +1,699 @@
+@use "../../../styles/breakpoints" as *;
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 170px 0 120px;
+
+    isolation: isolate;
+
+    border-bottom: 1px solid var(--ink-line);
+
+    background:
+        linear-gradient(180deg,
+            var(--ink) 0%,
+            var(--ink-soft) 100%);
+
+    @include respond("lg") {
+        padding: 150px 0 90px;
+    }
+
+    @include respond("sm") {
+        padding: 135px 0 70px;
+    }
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.grid {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -3;
+
+    opacity: .25;
+
+    background-image:
+
+        linear-gradient(rgba(255, 255, 255, .05) 1px,
+            transparent 1px),
+
+        linear-gradient(90deg,
+            rgba(255, 255, 255, .05) 1px,
+            transparent 1px);
+
+    background-size: 60px 60px;
+
+    mask-image:
+        radial-gradient(circle,
+            black,
+            transparent 95%);
+
+}
+
+/* ==========================================================
+   NOISE
+========================================================== */
+
+.noise {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .04;
+
+    z-index: -2;
+
+    background-image:
+
+        radial-gradient(rgba(255, 255, 255, .35) .6px,
+            transparent .6px);
+
+    background-size: 7px 7px;
+
+}
+
+/* ==========================================================
+   GLOW
+========================================================== */
+
+.glow {
+
+    position: absolute;
+
+    width: 700px;
+
+    aspect-ratio: 1;
+
+    right: -180px;
+
+    top: -150px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(circle,
+            color-mix(in srgb,
+                var(--accent) 18%,
+                transparent),
+            transparent 70%);
+
+    filter: blur(90px);
+
+    z-index: -1;
+
+    animation:
+        heroGlow 10s ease-in-out infinite;
+
+}
+
+@keyframes heroGlow {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0) scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-25px) scale(1.08);
+
+    }
+
+}
+
+/* ==========================================================
+   BREADCRUMB
+========================================================== */
+
+.breadcrumb {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 36px;
+
+    color: var(--text-dim);
+
+    font-size: 14px;
+
+    font-family: var(--font-mono);
+
+    a {
+
+        color: inherit;
+
+        transition: color .3s;
+
+        &:hover {
+
+            color: var(--paper);
+
+        }
+
+    }
+
+    span {
+
+        color: var(--paper);
+
+    }
+
+}
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.layout {
+
+    display: grid;
+
+    grid-template-columns: 1.1fr .9fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+    @include respond("xl") {
+
+        grid-template-columns: 1fr;
+
+        gap: 60px;
+
+    }
+
+}
+
+/* ==========================================================
+   LEFT CONTENT
+========================================================== */
+
+.content {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 16px;
+
+    margin-bottom: 28px;
+
+    border-radius: 999px;
+
+    background:
+
+        rgba(255, 255, 255, .04);
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(16px);
+
+    color: var(--paper);
+
+    font-size: 13px;
+
+    font-family: var(--font-mono);
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+    svg {
+
+        color: var(--cyan);
+
+    }
+
+}
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.content h1 {
+
+    margin: 0;
+
+    max-width: 720px;
+
+    font-family: var(--font-display);
+
+    font-size: clamp(52px, 7vw, 86px);
+
+    line-height: .95;
+
+    font-weight: 700;
+
+    letter-spacing: -.05em;
+
+    color: var(--paper);
+
+}
+
+/* ==========================================================
+   ACCENT LINE
+========================================================== */
+
+.accentLine {
+
+    width: 120px;
+
+    height: 4px;
+
+    margin: 28px 0;
+
+    border-radius: 999px;
+
+    background:
+
+        linear-gradient(90deg,
+            var(--cyan),
+            var(--amber));
+
+}
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.description {
+
+    max-width: 620px;
+
+    color: var(--text-dim);
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+}
+
+/* ==========================================================
+   ACTIONS
+========================================================== */
+
+.actions {
+
+    display: flex;
+
+    gap: 18px;
+
+    margin-top: 42px;
+
+    flex-wrap: wrap;
+
+}
+
+/* ==========================================================
+   RIGHT VISUAL
+========================================================== */
+
+.visual {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==========================================================
+   IMAGE CARD
+========================================================== */
+
+.imageCard {
+    position: relative;
+
+    width: min(100%, 520px);
+    aspect-ratio: 1;
+
+    overflow: hidden;
+
+    border-radius: 32px;
+
+    background: rgba(255, 255, 255, .03);
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    box-shadow:
+        0 35px 90px rgba(0, 0, 0, .45);
+
+    isolation: isolate;
+
+    transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+}
+
+.imageCard:hover {
+    transform:
+        translateY(-8px) rotate(-1deg);
+
+    box-shadow:
+        0 45px 110px rgba(0, 0, 0, .55);
+}
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+.image {
+    object-fit: cover;
+
+    transition:
+        transform .8s ease;
+}
+
+.imageCard:hover .image {
+    transform: scale(1.08);
+}
+
+/* ==========================================================
+   OVERLAY
+========================================================== */
+
+.overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(180deg,
+            rgba(11, 14, 19, .08),
+            rgba(11, 14, 19, .72));
+
+    z-index: 1;
+}
+
+/* ==========================================================
+   IMAGE GLOW
+========================================================== */
+
+.imageGlow {
+    position: absolute;
+
+    inset: auto;
+
+    width: 340px;
+    aspect-ratio: 1;
+
+    right: -80px;
+    bottom: -80px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle,
+            color-mix(in srgb, var(--accent) 25%, transparent),
+            transparent 72%);
+
+    filter: blur(70px);
+
+    z-index: 1;
+}
+
+/* ==========================================================
+   FLOATING ICON
+========================================================== */
+
+.floatingIcon {
+    position: absolute;
+
+    top: 30px;
+    right: 30px;
+
+    width: 84px;
+    height: 84px;
+
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--paper);
+
+    background: rgba(255, 255, 255, .08);
+
+    border: 1px solid rgba(255, 255, 255, .12);
+
+    backdrop-filter: blur(20px);
+
+    z-index: 3;
+
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, .35);
+}
+
+/* ==========================================================
+   SERVICE CHIP
+========================================================== */
+
+.serviceChip {
+    position: absolute;
+
+    left: 28px;
+    bottom: 28px;
+
+    z-index: 3;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 18px;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, .08);
+
+    border: 1px solid rgba(255, 255, 255, .12);
+
+    backdrop-filter: blur(20px);
+
+    color: var(--paper);
+
+    font-family: var(--font-mono);
+
+    font-size: 13px;
+
+    letter-spacing: .06em;
+
+    text-transform: uppercase;
+}
+
+/* ==========================================================
+   STATS
+========================================================== */
+
+.stats {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 46px;
+
+    max-width: 700px;
+}
+
+.stat {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 24px;
+
+    border-radius: 22px;
+
+    background: rgba(255, 255, 255, .04);
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(18px);
+
+    transition:
+        transform .35s ease,
+        border-color .35s ease;
+
+    &::before {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background:
+            radial-gradient(circle at top left,
+                rgba(255, 255, 255, .08),
+                transparent 65%);
+
+        opacity: 0;
+
+        transition: .35s;
+    }
+
+    &:hover {
+
+        transform: translateY(-8px);
+
+        border-color: rgba(255, 255, 255, .14);
+
+        &::before {
+            opacity: 1;
+        }
+
+    }
+}
+
+.stat h3 {
+    margin: 0;
+
+    font-size: clamp(32px, 4vw, 42px);
+
+    font-family: var(--font-display);
+
+    color: var(--paper);
+
+    line-height: 1;
+}
+
+.stat span {
+    display: block;
+
+    margin-top: 10px;
+
+    color: var(--text-dim);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@include respond("xl") {
+
+    .visual {
+        order: -1;
+    }
+
+    .imageCard {
+        max-width: 560px;
+    }
+
+}
+
+@include respond("lg") {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@include respond("md") {
+
+    .content h1 {
+        font-size: clamp(44px, 8vw, 64px);
+    }
+
+    .description {
+        font-size: 17px;
+    }
+
+    .imageCard {
+        border-radius: 24px;
+    }
+
+    .floatingIcon {
+        width: 70px;
+        height: 70px;
+    }
+
+}
+
+@include respond("sm") {
+
+    .layout {
+        gap: 40px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .badge {
+        font-size: 11px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
+    .actions {
+        flex-direction: column;
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    .floatingIcon {
+        width: 62px;
+        height: 62px;
+
+        top: 20px;
+        right: 20px;
+    }
+
+    .serviceChip {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+
+        justify-content: center;
+
+        font-size: 11px;
+    }
+
+}

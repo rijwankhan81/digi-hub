@@ -15,8 +15,42 @@
   margin: 0 auto 50px;
 
   h2 {
-    font-size: clamp(30px, 4vw, 44px);
-    font-weight: 600;
+    font-size: 70px;
+    line-height: 0.92;
+    font-weight: 700;
+    letter-spacing: -3px;
+
+
+    @include respond("sm") {
+      font-size: 50px;
+    }
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 14px;
+    font-weight: 700;
+
+    &::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: var(--cyan);
+    }
+
+    &::after {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: var(--cyan);
+    }
   }
 }
 

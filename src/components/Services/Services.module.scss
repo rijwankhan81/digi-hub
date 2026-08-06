@@ -80,7 +80,7 @@ HEADER
 
     margin: 20px 0;
 
-    font-size: clamp(46px, 6vw, 88px);
+    font-size: 70px;
 
     line-height: .92;
 
@@ -390,7 +390,7 @@ TEXT
 
   margin-top: 34px;
 
-  color: #76e8ff;
+  color: var(--cyan);
 
   text-transform: uppercase;
 

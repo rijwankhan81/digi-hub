@@ -4,9 +4,17 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, CalendarDays, Sparkles } from "lucide-react";
 
-import styles from "./PortfolioCta.module.scss";
+import styles from "./ServiceCTA.module.scss";
 
-export default function PortfolioCta() {
+interface ServiceCTAProps {
+  title?: string;
+  description?: string;
+}
+
+export default function ServiceCTA({
+  title = "Ready to build something exceptional?",
+  description = "Whether you're launching a new brand, scaling an existing business or exploring AI solutions, our team is ready to help turn your vision into measurable results.",
+}: ServiceCTAProps) {
   return (
     <section className={styles.section}>
       {/* Background */}
@@ -40,65 +48,54 @@ export default function PortfolioCta() {
 
           <div className={styles.badge}>
             <Sparkles size={16} />
-            Let's Build Together
+            Let's Work Together
           </div>
 
           {/* Heading */}
 
-          <h2>
-            Ready to create your
-            <br />
-            next
-            <span> digital success story?</span>
-          </h2>
+          <h2>{title}</h2>
 
           {/* Description */}
 
-          <p>
-            From branding and performance marketing to AI, automation and custom
-            software, let's build something your customers will remember.
-          </p>
+          <p>{description}</p>
 
           {/* CTA */}
 
           <div className={styles.actions}>
-            <Link href="/contact" className="btn btnPrimary">
+            <Link href="/contact" className="btn btn-primary">
               Start Your Project
               <ArrowRight size={18} />
             </Link>
 
-            <Link href="/contact" className="btn btnGhost">
+            <Link href="/contact" className="btn btn-ghost">
               <CalendarDays size={18} />
-              Schedule a Consultation
+              Book Consultation
             </Link>
+          </div>
+
+          {/* Bottom Stats */}
+
+          <div className={styles.meta}>
+            <div>
+              <strong>250+</strong>
+
+              <span>Projects Delivered</span>
+            </div>
+
+            <div>
+              <strong>98%</strong>
+
+              <span>Client Satisfaction</span>
+            </div>
+
+            <div>
+              <strong>24h</strong>
+
+              <span>Average Response</span>
+            </div>
           </div>
         </motion.div>
       </div>
-
-      {/* Floating Particles */}
-
-      {Array.from({
-        length: 18,
-      }).map((_, index) => (
-        <motion.span
-          key={index}
-          className={styles.particle}
-          style={
-            {
-              "--i": index,
-            } as React.CSSProperties
-          }
-          animate={{
-            opacity: [0.15, 0.8, 0.15],
-            scale: [0.8, 1.2, 0.8],
-            y: [0, -18, 0],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 3 + index * 0.2,
-          }}
-        />
-      ))}
     </section>
   );
 }

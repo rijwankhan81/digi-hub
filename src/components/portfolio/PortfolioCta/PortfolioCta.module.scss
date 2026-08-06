@@ -1,53 +1,520 @@
 @use "../../../styles/breakpoints" as *;
 
+/* ==========================================================
+   SECTION
+========================================================== */
+
 .section {
-    padding: 0 0 110px;
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 120px 0;
+
+    background:
+        linear-gradient(180deg,
+            var(--ink-soft) 0%,
+            var(--ink) 100%);
+
+    isolation: isolate;
+
+    @include respond("lg") {
+        padding: 100px 0;
+    }
 
     @include respond("sm") {
-        padding: 0 0 70px;
+        padding: 80px 0;
     }
 }
+
+/* ==========================================================
+   BACKGROUND GRID
+========================================================== */
+
+.grid {
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .18;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(rgba(255, 255, 255, .04) 1px,
+            transparent 1px),
+        linear-gradient(90deg,
+            rgba(255, 255, 255, .04) 1px,
+            transparent 1px);
+
+    background-size: 72px 72px;
+
+    mask-image:
+        radial-gradient(circle,
+            black,
+            transparent 94%);
+}
+
+/* ==========================================================
+   GLOW ORBS
+========================================================== */
+
+.glowLeft {
+    position: absolute;
+
+    left: -220px;
+
+    top: -120px;
+
+    width: 520px;
+
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle,
+            rgba(0, 217, 184, .18),
+            transparent 72%);
+
+    filter: blur(90px);
+
+    animation:
+        glowFloat 12s ease-in-out infinite;
+}
+
+.glowRight {
+    position: absolute;
+
+    right: -220px;
+
+    bottom: -180px;
+
+    width: 520px;
+
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle,
+            rgba(255, 178, 56, .16),
+            transparent 72%);
+
+    filter: blur(90px);
+
+    animation:
+        glowFloat 11s ease-in-out infinite reverse;
+}
+
+@keyframes glowFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0) scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-28px) scale(1.08);
+
+    }
+
+}
+
+/* ==========================================================
+   PANEL
+========================================================== */
 
 .panel {
-    background: var(--ink-soft);
-    border: 1px solid var(--ink-line);
-    border-radius: var(--radius);
-    padding: 64px 40px;
+    position: relative;
+
+    z-index: 2;
+
+    overflow: hidden;
+
+    max-width: 920px;
+
+    margin: 0 auto;
+
+    padding: 70px;
+
+    border-radius: 36px;
+
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, .06),
+            rgba(255, 255, 255, .03));
+
+    border:
+        1px solid rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(26px);
+
+    -webkit-backdrop-filter: blur(26px);
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, .35);
+
     text-align: center;
 
+    isolation: isolate;
+
+    @include respond("md") {
+        padding: 52px;
+    }
+
     @include respond("sm") {
-        padding: 44px 24px;
-    }
+        padding: 36px 24px;
 
-    h2 {
-        font-size: clamp(26px, 3.6vw, 38px);
-        font-weight: 600;
-    }
-
-    p {
-        margin-top: 14px;
-        color: var(--text-dim);
-        font-size: 16px;
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
+        border-radius: 24px;
     }
 }
 
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 30px;
-    padding: 14px 28px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: var(--radius);
-    background: var(--cyan);
-    color: var(--ink);
-    cursor: pointer;
+/* ==========================================================
+   BADGE
+========================================================== */
 
-    &:hover {
-        background: #1fe8c8;
+.badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 18px;
+
+    margin-bottom: 30px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, .04);
+
+    border:
+        1px solid rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(18px);
+
+    color: var(--cyan);
+
+    font-family: var(--font-mono);
+
+    font-size: 12px;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.panel h2 {
+    margin: 0 auto;
+
+    max-width: 760px;
+
+    color: var(--paper);
+
+    font-family: var(--font-display);
+
+    font-size: clamp(46px, 6vw, 74px);
+
+    line-height: 1.05;
+
+    letter-spacing: -.04em;
+
+    span {
+        background:
+            linear-gradient(90deg,
+                var(--cyan),
+                var(--amber));
+
+        -webkit-background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+        background-clip: text;
     }
+}
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.panel p {
+    margin: 28px auto 0;
+
+    max-width: 640px;
+
+    color: var(--text-dim);
+
+    font-size: 18px;
+
+    line-height: 1.85;
+
+    @include respond("sm") {
+        font-size: 16px;
+    }
+}
+
+/* ==========================================================
+   ACTIONS
+========================================================== */
+
+.actions {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 44px;
+
+    flex-wrap: wrap;
+}
+
+/* ==========================================================
+   PANEL GLOW
+========================================================== */
+
+.panel::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: inherit;
+
+    background:
+        radial-gradient(circle at top,
+            rgba(255, 255, 255, .08),
+            transparent 65%);
+
+    opacity: .45;
+
+    pointer-events: none;
+}
+
+.panel:hover {
+    border-color:
+        rgba(255, 255, 255, .14);
+
+    box-shadow:
+        0 42px 120px rgba(0, 0, 0, .42);
+}
+
+/* ==========================================================
+   SHINE EFFECT
+========================================================== */
+
+.panel::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -140%;
+
+    width: 60%;
+
+    height: 100%;
+
+    transform: skewX(-22deg);
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, .14),
+            transparent);
+
+    transition:
+        left .9s ease;
+}
+
+.panel:hover::after {
+    left: 180%;
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.actions .btn {
+    min-width: 220px;
+}
+
+/* ==========================================================
+   FLOATING PARTICLES
+========================================================== */
+
+.particle {
+    position: absolute;
+
+    width: 4px;
+
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: var(--cyan);
+
+    opacity: .22;
+
+    left: calc((var(--i) * 5.5%) + 2%);
+
+    top: calc((var(--i) * 4%) + 10%);
+
+    pointer-events: none;
+
+    box-shadow:
+        0 0 10px var(--cyan);
+}
+
+.particle:nth-child(even) {
+    background: var(--amber);
+
+    box-shadow:
+        0 0 10px var(--amber);
+}
+
+/* ==========================================================
+   PANEL ANIMATION
+========================================================== */
+
+.panel {
+    transition:
+        transform .45s ease,
+        border-color .45s ease,
+        box-shadow .45s ease;
+}
+
+.panel:hover {
+    transform:
+        translateY(-6px);
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.badge {
+    transition:
+        border-color .35s ease,
+        background .35s ease;
+}
+
+.panel:hover .badge {
+    border-color:
+        rgba(0, 217, 184, .25);
+
+    background:
+        rgba(0, 217, 184, .06);
+}
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.panel h2 span {
+    background-size: 200% auto;
+
+    animation:
+        gradientShift 6s linear infinite;
+}
+
+@keyframes gradientShift {
+
+    from {
+
+        background-position: 0% center;
+
+    }
+
+    to {
+
+        background-position: 200% center;
+
+    }
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@include respond("md") {
+
+    .panel {
+
+        padding: 48px;
+
+    }
+
+    .panel h2 {
+
+        font-size:
+            clamp(42px, 6vw, 62px);
+
+    }
+
+}
+
+@include respond("sm") {
+
+    .panel {
+
+        padding: 32px 22px;
+
+        border-radius: 22px;
+
+    }
+
+    .panel h2 {
+
+        font-size:
+            clamp(34px, 10vw, 50px);
+
+        line-height: 1.08;
+
+    }
+
+    .panel p {
+
+        margin-top: 22px;
+
+        font-size: 15px;
+
+    }
+
+    .actions {
+
+        margin-top: 34px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 14px;
+
+    }
+
+    .actions .btn {
+
+        width: 100%;
+
+        min-width: auto;
+
+    }
+
 }

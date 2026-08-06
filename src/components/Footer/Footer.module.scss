@@ -19,10 +19,15 @@
   border-bottom: 1px solid var(--paper-line);
 
   h2 {
-    font-size: clamp(32px, 5vw, 58px);
-    font-weight: 600;
-    max-width: 640px;
-    line-height: 1.05;
+    font-size: 70px;
+    line-height: 0.92;
+    font-weight: 700;
+    letter-spacing: -3px;
+    max-width: 800px;
+
+    @include respond("sm") {
+      font-size: 50px;
+    }
   }
 
   @include respond("xl") {
@@ -31,27 +36,6 @@
   }
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 26px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: var(--radius);
-  cursor: pointer;
-  flex-shrink: 0;
-  font-family: var(--font-body);
-}
-
-.btnPrimary {
-  background: var(--ink);
-  color: var(--paper);
-
-  &:hover {
-    background: #000;
-  }
-}
 
 .grid {
   display: grid;

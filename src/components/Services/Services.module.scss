@@ -601,7 +601,8 @@ NOISE OVERLAY
 
 .card,
 .card2,
-.card3 {
+.card3,
+.card4 {
 
   position: absolute;
 
@@ -644,6 +645,16 @@ NOISE OVERLAY
 }
 
 .card3 {
+  top: 30px;
+  left: -20px;
+
+
+
+  animation-delay: 4s;
+
+}
+
+.card4 {
 
   bottom: -10px;
 
@@ -659,12 +670,13 @@ NOISE OVERLAY
 
   justify-content: center;
 
-  animation-delay: 4s;
+  animation-delay: 6s;
 
 }
 
 .card span,
-.card2 span {
+.card2 span,
+.card3 span {
 
   display: block;
 
@@ -679,7 +691,8 @@ NOISE OVERLAY
 }
 
 .card strong,
-.card2 strong {
+.card2 strong,
+.card3 strong {
 
   display: block;
 

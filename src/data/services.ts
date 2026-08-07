@@ -8,8 +8,6 @@ import {
   GraduationCap,
 } from "lucide-react";
 
-import type { LucideIcon } from "lucide-react";
-
 export const SERVICE_ICONS = {
   globe: Globe,
   palette: Palette,
@@ -27,6 +25,7 @@ export interface Service {
   title: string;
   subtitle: string;
   short: string;
+  color: string;
 
   description: string;
 
@@ -62,6 +61,7 @@ export const SERVICES: Service[] = [
 
     title: "Digital Marketing",
     subtitle: "Grow Faster With Performance",
+    color: "#00E5FF",
     short: "SEO • Ads • Social Media",
 
     description:
@@ -130,7 +130,7 @@ export const SERVICES: Service[] = [
 
     title: "Branding & Creative",
     subtitle: "Create Brands That People Love",
-
+    color: "#FF9D00",
     short: "Identity • Strategy • Design",
 
     description:
@@ -202,6 +202,7 @@ export const SERVICES: Service[] = [
 
     title: "Content & Media Production",
     subtitle: "Stories That Inspire",
+    color: "#A855F7",
     short: "Video • Motion • Production",
 
     description:
@@ -283,6 +284,7 @@ export const SERVICES: Service[] = [
 
     title: "Business Consulting",
     subtitle: "Ideas Into Business",
+    color: "#00D27A",
     short: "Growth • Strategy • Startup",
 
     description:
@@ -359,6 +361,7 @@ export const SERVICES: Service[] = [
 
     title: "Website & App Development",
     subtitle: "Beautiful Digital Products",
+    color: "#4F7CFF",
     short: "Web • Mobile • UI/UX",
 
     description:
@@ -435,6 +438,7 @@ export const SERVICES: Service[] = [
 
     title: "AI Solutions",
     subtitle: "Automation That Works",
+    color: "#14F195",
     short: "Automation • AI • Chatbots",
 
     description:
@@ -512,6 +516,7 @@ export const SERVICES: Service[] = [
 
     title: "Training & Workshops",
     subtitle: "Empower Your Team",
+    color: "#F43F5E",
     short: "Corporate • AI • Marketing",
 
     description:

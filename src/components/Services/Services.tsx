@@ -1,5 +1,5 @@
 "use client";
-
+import { SERVICE_ICONS, SERVICES } from "@/data/services";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { motion } from "framer-motion";
@@ -16,112 +16,113 @@ import {
 
 import styles from "./Services.module.scss";
 import { useGsap } from "@/lib/gsap";
+import Link from "next/link";
 
-const SERVICES = [
-  {
-    id: "01",
-    title: "Digital Marketing",
-    subtitle: "Grow Faster With Performance",
-    color: "#00E5FF",
-    icon: Globe,
-    items: [
-      "Social Media Marketing",
-      "Google Ads",
-      "Lead Generation",
-      "Marketing Strategy",
-    ],
-  },
+// const SERVICES = [
+//   {
+//     id: "01",
+//     title: "Digital Marketing",
+//     subtitle: "Grow Faster With Performance",
+//     color: "#00E5FF",
+//     icon: Globe,
+//     items: [
+//       "Social Media Marketing",
+//       "Google Ads",
+//       "Lead Generation",
+//       "Marketing Strategy",
+//     ],
+//   },
 
-  {
-    id: "02",
-    title: "Branding & Creative",
-    subtitle: "Create Brands That People Love",
-    color: "#FF9D00",
-    icon: Palette,
-    items: ["Brand Identity", "Corporate Profile Design", "Brand Strategy"],
-  },
+//   {
+//     id: "02",
+//     title: "Branding & Creative",
+//     subtitle: "Create Brands That People Love",
+//     color: "#FF9D00",
+//     icon: Palette,
+//     items: ["Brand Identity", "Corporate Profile Design", "Brand Strategy"],
+//   },
 
-  {
-    id: "03",
-    title: "Content & Media Production ",
-    subtitle: "Stories That Inspire",
-    color: "#A855F7",
-    icon: Clapperboard,
-    items: [
-      "TVC & OVC Production",
-      "Live Streaming",
-      "Documentary & Film Production",
-      "Corporate & Product Photography",
-      "Videography",
-      "Podcast Production",
-      "Studio Rental",
-      "Motion & Graphics",
-      "Video Editing",
-      "Copywriting",
-    ],
-  },
+//   {
+//     id: "03",
+//     title: "Content & Media Production ",
+//     subtitle: "Stories That Inspire",
+//     color: "#A855F7",
+//     icon: Clapperboard,
+//     items: [
+//       "TVC & OVC Production",
+//       "Live Streaming",
+//       "Documentary & Film Production",
+//       "Corporate & Product Photography",
+//       "Videography",
+//       "Podcast Production",
+//       "Studio Rental",
+//       "Motion & Graphics",
+//       "Video Editing",
+//       "Copywriting",
+//     ],
+//   },
 
-  {
-    id: "04",
-    title: "Business Consulting",
-    subtitle: "Ideas Into Business",
-    color: "#00D27A",
-    icon: BriefcaseBusiness,
-    items: [
-      "Business Strategy",
-      "Startup Consulting",
-      "Market Research",
-      "Sales Consulting ",
-      "Go-to-Market Strategy ",
-      "Digital Transformation ",
-    ],
-  },
+//   {
+//     id: "04",
+//     title: "Business Consulting",
+//     subtitle: "Ideas Into Business",
+//     color: "#00D27A",
+//     icon: BriefcaseBusiness,
+//     items: [
+//       "Business Strategy",
+//       "Startup Consulting",
+//       "Market Research",
+//       "Sales Consulting ",
+//       "Go-to-Market Strategy ",
+//       "Digital Transformation ",
+//     ],
+//   },
 
-  {
-    id: "05",
-    title: "Website & App Development",
-    subtitle: "Beautiful Digital Products",
-    color: "#4F7CFF",
-    icon: MonitorSmartphone,
-    items: [
-      "Corporate Websites",
-      "E-commerce Websites",
-      "Custom Web Applications",
-      "UI/UX Design",
-      "SEO",
-      "Website Maintenance",
-    ],
-  },
+//   {
+//     id: "05",
+//     title: "Website & App Development",
+//     subtitle: "Beautiful Digital Products",
+//     color: "#4F7CFF",
+//     icon: MonitorSmartphone,
+//     items: [
+//       "Corporate Websites",
+//       "E-commerce Websites",
+//       "Custom Web Applications",
+//       "UI/UX Design",
+//       "SEO",
+//       "Website Maintenance",
+//     ],
+//   },
 
-  {
-    id: "06",
-    title: "AI Solutions",
-    subtitle: "Automation That Works",
-    color: "#14F195",
-    icon: Bot,
-    items: [
-      "AI Chatbots",
-      "AI Customer Support ",
-      "AI Content Creation ",
-      "AI Marketing Automation ",
-      "Workflow Automation ",
-      "CRM Integration ",
-    ],
-  },
+//   {
+//     id: "06",
+//     title: "AI Solutions",
+//     subtitle: "Automation That Works",
+//     color: "#14F195",
+//     icon: Bot,
+//     items: [
+//       "AI Chatbots",
+//       "AI Customer Support ",
+//       "AI Content Creation ",
+//       "AI Marketing Automation ",
+//       "Workflow Automation ",
+//       "CRM Integration ",
+//     ],
+//   },
 
-  {
-    id: "07",
-    title: "Training & Workshops",
-    subtitle: "Empower Your Team",
-    color: "#F43F5E",
-    icon: GraduationCap,
-    items: [
-      "Corporate Training",
-      "AI for Business",
-      "Digital Marketing Training",
-    ],
-  },
-];
+//   {
+//     id: "07",
+//     title: "Training & Workshops",
+//     subtitle: "Empower Your Team",
+//     color: "#F43F5E",
+//     icon: GraduationCap,
+//     items: [
+//       "Corporate Training",
+//       "AI for Business",
+//       "Digital Marketing Training",
+//     ],
+//   },
+// ];
 
 export default function Services() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -245,7 +246,7 @@ export default function Services() {
       <div id="services" ref={sectionRef}>
         <div className={styles.track} ref={trackRef}>
           {SERVICES.map((service) => {
-            const Icon = service.icon;
+            const Icon = SERVICE_ICONS[service.icon];
 
             return (
               <section
@@ -282,7 +283,7 @@ export default function Services() {
                   </p>
 
                   <div className={styles.tags}>
-                    {service.items.map((item) => (
+                    {service.features.map((item) => (
                       <motion.div
                         key={item}
                         className={styles.tag}
@@ -306,7 +307,10 @@ export default function Services() {
                       x: 8,
                     }}
                   >
-                    Explore Service
+                    {" "}
+                    <Link key={service.slug} href={`/services/${service.slug}`}>
+                      Explore Service
+                    </Link>
                     <ArrowUpRight size={18} strokeWidth={2} />
                   </motion.button>
                 </div>
@@ -332,20 +336,25 @@ export default function Services() {
                         background: service.color,
                       }}
                     ></div>
-
-                    <div className={styles.card}>
-                      <span>Growth</span>
-
-                      <strong>+247%</strong>
+                    <div className={styles.stats}>
+                      {service.stats.map((item, index) => (
+                        <div
+                          key={item.label}
+                          className={
+                            index === 0
+                              ? styles.card
+                              : index === 1
+                                ? styles.card2
+                                : styles.card3
+                          }
+                        >
+                          <span>{item.label}</span>
+                          <strong>{item.value}</strong>
+                        </div>
+                      ))}
                     </div>
 
-                    <div className={styles.card2}>
-                      <span>AI Score</span>
-
-                      <strong>98%</strong>
-                    </div>
-
-                    <div className={styles.card3}>
+                    <div className={styles.card4}>
                       <Icon size={40} />
                     </div>
                   </motion.div>

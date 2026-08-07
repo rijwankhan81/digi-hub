@@ -159,8 +159,7 @@ export default function Header() {
                               return (
                                 <Link
                                   key={service.slug}
-                                  // href={`/services/${service.slug}`}
-                                  href={`/services/page`}
+                                  href={`/services/${service.slug}`}
                                   className={styles.dropdownItem}
                                 >
                                   <div
